@@ -2,11 +2,18 @@ package Model;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+import javax.persistence.*;
 
+@Entity
 public class ResultMatch {
-    String winner;
-    int scoreHomeTeam;
-    int scoreAwayTeam;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    long id;
+    String winner = "";
+    int scoreHomeTeam = 0;
+    int scoreAwayTeam = 0;
+    @OneToOne
+    Matche matche;
 
     public String getWinner() {
         return winner;
@@ -32,10 +39,18 @@ public class ResultMatch {
         this.scoreAwayTeam = scoreAwayTeam;
     }
 
-    public JsonObject toJsonObject(){
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public JsonObject toJsonObject() {
         return Json.createObjectBuilder()
-                .add("winner",winner)
-                .add("scoreHomeTeam",scoreHomeTeam)
-                .add("scoreAwayTeam",scoreAwayTeam).build();
+                .add("winner", winner)
+                .add("scoreHomeTeam", scoreHomeTeam)
+                .add("scoreAwayTeam", scoreAwayTeam).build();
     }
 }

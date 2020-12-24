@@ -1,6 +1,6 @@
 package Service;
 
-import Model.Match;
+import Model.Matche;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
@@ -41,21 +41,21 @@ public class RestService {
     @Path("/parieur/matchs")
     @Produces(MediaType.APPLICATION_JSON)
     public JsonArray getMatchs(@QueryParam("search") String search) {
-        List<Match> matchs = new ArrayList();
+        List<Matche> matches = new ArrayList();
         if (search.isEmpty()) {
-            matchs = FootballRestService.getScheduleMatch(competition);
+            matches = FootballRestService.getScheduleMatch(competition);
         } else {
             String searchstr = search.toLowerCase();
-            List<Match> allMatchs = FootballRestService.getScheduleMatch(competition);
-            for(Match m : allMatchs){
+            List<Matche> allMatches = FootballRestService.getScheduleMatch(competition);
+            for(Matche m : allMatches){
                 if(m.getHomeTeam().toLowerCase().contains(searchstr) || m.getAwayTeam().toLowerCase().contains(searchstr) || searchstr.contains(m.getId() + "")){
-                    matchs.add(m);
+                    matches.add(m);
                 }
             }
         }
 
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-        for(Match m : matchs){
+        for(Matche m : matches){
             arrayBuilder.add(m.toJsonObject());
         }
         JsonArray jsonArray = arrayBuilder.build();
@@ -66,8 +66,8 @@ public class RestService {
     @Path("/parieur/match/{idmatch}")
     @Produces(MediaType.APPLICATION_JSON)
     public JsonObject getMatch(@PathParam("idmatch") int idmatch) {
-        Match match = FootballRestService.getMatch(idmatch);
-        return match.toJsonObject();
+        Matche matche = FootballRestService.getMatch(idmatch);
+        return matche.toJsonObject();
     }
 
     @GET
