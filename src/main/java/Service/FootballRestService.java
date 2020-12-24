@@ -1,6 +1,6 @@
 package Service;
 
-import Model.Match;
+import Model.Matche;
 import Model.ResultMatch;
 import Model.SeasonMatch;
 import org.glassfish.jersey.client.ClientConfig;
@@ -42,7 +42,7 @@ public class FootballRestService {
         return null;
     }
 
-    public static List<Match> getScheduleMatch(String competitionID) {
+    public static List<Matche> getScheduleMatch(String competitionID) {
         WebTarget target = c.target("http://api.football-data.org/v2/competitions/" + competitionID);
         Invocation.Builder builder = target.request().header("X-Auth-Token", tokenAPI);
         Response response = builder.get();
@@ -58,12 +58,12 @@ public class FootballRestService {
         return getListOfMatch(competitionID, matchday + 1);
     }
 
-    public static List<Match> getListOfMatch(String competitionID, int matchday) {
+    public static List<Matche> getListOfMatch(String competitionID, int matchday) {
         WebTarget target = c.target("http://api.football-data.org/v2/competitions/" + competitionID + "/matches?matchday=" + matchday);
         Invocation.Builder builder = target.request().header("X-Auth-Token", tokenAPI);
         Response response = builder.get();
         if (response.getStatus() == 200) {
-            List<Match> matchlist = new ArrayList();
+            List<Matche> matchlist = new ArrayList();
             String respstring = response.readEntity(String.class);
             StringReader stringReader = new StringReader(respstring);
             JsonReader reader = Json.createReader(stringReader);
@@ -76,7 +76,8 @@ public class FootballRestService {
             JsonArray matches = jsonObject.getJsonArray("matches");
             for (int i = 0; i < matches.size(); i++) {
                 JsonObject match = matches.getJsonObject(i);
-                Match m = new Match(match.getInt("id"));
+                Matche m = new Matche();
+                m.setId(match.getInt("id"));
                 m.setName(name);
                 m.setPlace(place);
                 JsonObject awayTeam = match.getJsonObject("awayTeam");
@@ -111,7 +112,7 @@ public class FootballRestService {
         return null;
     }
 
-    public static Match getMatch(int idMatch) {
+    public static Matche getMatch(int idMatch) {
         WebTarget target = c.target("http://api.football-data.org/v2/matches/" + idMatch);
         Invocation.Builder builder = target.request().header("X-Auth-Token", tokenAPI);
         Response response = builder.get();
@@ -120,7 +121,8 @@ public class FootballRestService {
             StringReader stringReader = new StringReader(respstring);
             JsonReader reader = Json.createReader(stringReader);
             JsonObject match = reader.readObject().getJsonObject("match");
-            Match m = new Match(match.getInt("id"));
+            Matche m = new Matche();
+            m.setId(match.getInt("id"));
             JsonObject competition = match.getJsonObject("competition");
             String place = competition.getJsonObject("area").getString("name");
             String name = competition.getString("name");
@@ -159,9 +161,9 @@ public class FootballRestService {
 
 
     public static JsonArray getJSONScheduleMatch(String competitionID) {
-        List<Match> scheduleMatch = getScheduleMatch(competitionID);
+        List<Matche> scheduleMatches = getScheduleMatch(competitionID);
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-        for(Match m : scheduleMatch){
+        for(Matche m : scheduleMatches){
             arrayBuilder.add(m.toJsonObject());
         }
         JsonArray jsonArray = arrayBuilder.build();
