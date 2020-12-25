@@ -1,9 +1,8 @@
 package View;
 
 import Controller.AministrateurController;
-import Model.Bookmakeur;
-import Model.Cote;
-import Model.Matche;
+import Controller.ParieurController;
+import Model.*;
 
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
@@ -20,6 +19,9 @@ public class Login implements Serializable {
 
     @EJB
     AministrateurController administrateurController;
+
+    @EJB
+    ParieurController parieurController;
 
     public Login() {
     }
@@ -72,5 +74,18 @@ public class Login implements Serializable {
         List<Bookmakeur> listBookmakeur = administrateurController.getListBookmakeur();
         Bookmakeur bookmakeur = listBookmakeur.get(0);
         administrateurController.deleteBookmakeur(bookmakeur);
+    }
+
+    public void test4() {
+//        List<Bookmakeur> listBookmakeur = administrateurController.getListBookmakeur();
+//        Bookmakeur bookmakeur = listBookmakeur.get(0);
+//        administrateurController.deleteBookmakeur(bookmakeur);
+
+        Pari pari = new Pari();
+        List<Matche> listMatch = parieurController.getListMatch("");
+        pari.setMatche(listMatch.get(0));
+        pari.setCote(new Cote());
+
+        parieurController.createPari(1,pari);
     }
 }

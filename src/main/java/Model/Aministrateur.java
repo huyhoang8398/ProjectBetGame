@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Aministrateur{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     public Aministrateur() {
     }

@@ -30,17 +30,18 @@ public class AministrateurController {
         return list;
     }
 
-    public long createBookmakeur(Bookmakeur bookmakeurFace) {
-        em.persist(bookmakeurFace);
-        em.persist(bookmakeurFace.getMatchHost());
-        em.persist(bookmakeurFace.getCote());
-        return bookmakeurFace.getId();
+    public long createBookmakeur(Bookmakeur bookmakeur) {
+        em.persist(bookmakeur);
+        em.persist(bookmakeur.getMatchHost());
+        em.persist(bookmakeur.getCote());
+        return bookmakeur.getId();
     }
 
-    public void updateBookmakeur(Bookmakeur bookmakeurFace) {
-        em.merge(bookmakeurFace);
-//        em.merge(bookmakeurFace.getMatchHost());
-//        em.merge(bookmakeurFace.getCote());
+    public long updateBookmakeur(Bookmakeur bookmakeur) {
+        em.merge(bookmakeur);
+        em.merge(bookmakeur.getMatchHost());
+        em.merge(bookmakeur.getCote());
+        return bookmakeur.getId();
     }
 
     public void deleteBookmakeur(Bookmakeur bookmakeurFace) {
@@ -50,8 +51,14 @@ public class AministrateurController {
     }
 
     public long createParieur(Parieur parieurFace) {
+        parieurFace.setMoney(1000); // 1000 Limcoin
         em.persist(parieurFace);
+        em.persist(parieurFace.getPariLst());
         return parieurFace.getId();
+    }
+
+    public Parieur getParieur(long id){
+        return em.find(Parieur.class, id);
     }
 
     public void updateParieur(Parieur parieurFace) {
