@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+    <title>Title</title>
+</head>
+<body>
+<style>
+    table {
+        width: 100%;
+        table-layout: fixed;
+    }
+    table, td,th{
+        border: 1px solid black;
+        text-align: center;
+    }
+</style>
+<div>
+    <h:outputLabel value="UserAccount Table"/>
+    <h:dataTable value="#{datatable.userAccounts}" var="itemuser">
+        <h:column>
+            <f:facet name="header">Username</f:facet>
+            <h:outputLabel value="#{itemuser.username}" size="10"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Password</f:facet>
+            <h:outputLabel value="#{itemuser.password}" size="10"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Role</f:facet>
+            <h:outputLabel value="#{itemuser.role}" size="10"/>
+        </h:column>
+    </h:dataTable>
+</div>
+
+<div>
+    <h:outputLabel value="Bookmakeurs Table"/>
+    <h:dataTable value="#{datatable.bookmakeurs}" var="item">
+        <h:column>
+            <f:facet name="header">id</f:facet>
+            <h:outputLabel value="#{item.id}" size="10"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Cote ID</f:facet>
+            <h:outputLabel value="#{item.cote.id}" size="10"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Matche Id</f:facet>
+            <h:outputLabel value="#{item.matcheHost.id}" size="10"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Username</f:facet>
+            <h:outputLabel value="#{item.userAccount.username}" size="10"/>
+        </h:column>
+    </h:dataTable>
+</div>
+
+<div>
+    <h:outputLabel value="Parieur Table"/>
+    <h:dataTable value="#{datatable.parieurs}" var="itemparieur">
+        <h:column>
+            <f:facet name="header">id</f:facet>
+            <h:outputLabel value="#{itemparieur.id}" size="10"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            <h:outputLabel value="#{itemparieur.name}" size="10"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Money</f:facet>
+            <h:outputLabel value="#{itemparieur.money}" size="10"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Twitter Name</f:facet>
+            <h:outputLabel value="#{itemparieur.twitterName}" size="10"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Username</f:facet>
+            <h:outputLabel value="#{itemparieur.userAccount.username}" size="10"/>
+        </h:column>
+    </h:dataTable>
+</div>
+
+<div>
+    <h:outputLabel value="Cote Table"/>
+    <h:dataTable value="#{datatable.cotes}" var="itemcote">
+        <h:column>
+            <f:facet name="header">id</f:facet>
+            <h:outputLabel value="#{itemcote.id}" size="10"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">ExactScore</f:facet>
+            <h:outputLabel value="#{itemcote.exactScore}" size="10"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Victory</f:facet>
+            <h:outputLabel value="#{itemcote.victory}" size="10"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Loss</f:facet>
+            <h:outputLabel value="#{itemcote.loss}" size="10"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">PointNumber</f:facet>
+            <h:outputLabel value="#{itemcote.pointNumber}" size="10"/>
+        </h:column>
+    </h:dataTable>
+</div>
+
+<div>
+    <h:outputLabel value="Matche Table"/>
+    <h:dataTable value="#{datatable.matches}" var="itemmatch">
+        <h:column>
+            <f:facet name="header">id</f:facet>
+            <h:outputLabel value="#{itemmatch.id}" size="10"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            <h:outputLabel value="#{itemmatch.name}" size="10"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Awayteam Name</f:facet>
+            <h:outputLabel value="#{itemmatch.awayTeam}" size="10"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Awayteam Id</f:facet>
+            <h:outputLabel value="#{itemmatch.awayTeamId}" size="10"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Hometeam Name</f:facet>
+            <h:outputLabel value="#{itemmatch.homeTeam}" size="10"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Hometeam Id</f:facet>
+            <h:outputLabel value="#{itemmatch.homeTeamId}" size="10"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Duration</f:facet>
+            <h:outputLabel value="#{itemmatch.duration}" size="10"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Place</f:facet>
+            <h:outputLabel value="#{itemmatch.place}" size="10"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Result match</f:facet>
+            <h:outputLabel value="#{itemmatch.resultmatch}" size="10"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Start date</f:facet>
+            <h:outputLabel value="#{itemmatch.startDate}" size="10"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">url</f:facet>
+            <h:outputLabel value="#{itemmatch.url}" size="10"/>
+        </h:column>
+    </h:dataTable>
+</div>
+
+<div>
+    <h:outputLabel value="Paris Table"/>
+    <h:dataTable value="#{datatable.paris}" var="itemparis">
+        <h:column>
+            <f:facet name="header">id</f:facet>
+            <h:outputLabel value="#{itemparis.id}" size="10"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Money</f:facet>
+            <h:outputLabel value="#{itemparis.money}" size="10"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Team Id</f:facet>
+            <h:outputLabel value="#{itemparis.teamId}" size="10"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Cote Id</f:facet>
+            <h:outputLabel value="#{itemparis.cote.id}" size="10"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Matche Id</f:facet>
+            <h:outputLabel value="#{itemparis.matche.id}" size="10"/>
+        </h:column>
+    </h:dataTable>
+</div>
+</body>
+</html>

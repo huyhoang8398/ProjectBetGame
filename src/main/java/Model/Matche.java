@@ -7,7 +7,6 @@ import javax.persistence.*;
 @Entity
 public class Matche {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String name;
     String startDate;
@@ -21,13 +20,14 @@ public class Matche {
     ResultMatch resultmatch;
     String url;
 
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-        this.url = "http://localhost:8080/REST-Service-1.0-SNAPSHOT/rest/service/parieur/match/" + id;
+        this.url = "http://localhost:8080/REST-Service-1.0-SNAPSHOT/rest/parieur/match/" + id;
     }
 
     public String getName() {
@@ -123,5 +123,21 @@ public class Matche {
                 .add("awayTeam", awayTeam)
                 .add("resultmatch", resultmatch.toJsonObject())
                 .add("url", url).build();
+    }
+
+    public Matche fromJsonObject(JsonObject jsonObject) {
+        this.setId(jsonObject.getInt("id"));
+        this.setName(jsonObject.getString("name"));
+        this.setStartDate(jsonObject.getString("startDate"));
+        this.setPlace(jsonObject.getString("place"));
+        this.setDuration(jsonObject.getString("duration"));
+        this.setHomeTeamId(jsonObject.getInt("homeTeamId"));
+        this.setHomeTeam(jsonObject.getString("homeTeam"));
+        this.setAwayTeamId(jsonObject.getInt("awayTeamId"));
+        this.setAwayTeam(jsonObject.getString("awayTeam"));
+        ResultMatch rs = new ResultMatch();
+        this.setResultmatch(rs.fromJsonObject(jsonObject.getJsonObject("resultmatch")));
+        this.setUrl(jsonObject.getString("url"));
+        return this;
     }
 }

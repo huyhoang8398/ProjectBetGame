@@ -1,9 +1,6 @@
 package Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -14,6 +11,12 @@ public class Parieur {
     String name;
     int money;
     String twitterName;
+
+    @OneToMany
+    List<Pari> pariLst;
+
+    @OneToOne
+    UserAccount userAccount;
 
     public Parieur() {
     }
@@ -60,5 +63,21 @@ public class Parieur {
 
     public void setTwitterName(String twitterName) {
         this.twitterName = twitterName;
+    }
+
+    public List<Pari> getPariLst() {
+        return pariLst;
+    }
+
+    public void setPariLst(List<Pari> pari) {
+        this.pariLst = pari;
+    }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 }

@@ -38,47 +38,6 @@ public class RestService {
 
 
     @GET
-    @Path("/parieur/matchs")
-    @Produces(MediaType.APPLICATION_JSON)
-    public JsonArray getMatchs(@QueryParam("search") String search) {
-        List<Matche> matches = new ArrayList();
-        if (search.isEmpty()) {
-            matches = FootballRestService.getScheduleMatch(competition);
-        } else {
-            String searchstr = search.toLowerCase();
-            List<Matche> allMatches = FootballRestService.getScheduleMatch(competition);
-            for(Matche m : allMatches){
-                if(m.getHomeTeam().toLowerCase().contains(searchstr) || m.getAwayTeam().toLowerCase().contains(searchstr) || searchstr.contains(m.getId() + "")){
-                    matches.add(m);
-                }
-            }
-        }
-
-        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-        for(Matche m : matches){
-            arrayBuilder.add(m.toJsonObject());
-        }
-        JsonArray jsonArray = arrayBuilder.build();
-        return jsonArray;
-    }
-
-    @GET
-    @Path("/parieur/match/{idmatch}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public JsonObject getMatch(@PathParam("idmatch") int idmatch) {
-        Matche matche = FootballRestService.getMatch(idmatch);
-        return matche.toJsonObject();
-    }
-
-    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-    public int betTheMatch(@QueryParam("IDmatch") int id, @QueryParam("pari") int pari) {
-        Twitter twitter = TwitterFactory.getSingleton();
-        System.out.println("agaga" + twitter.suggestedUsers());
-        return 0;
-    }
-
-    @GET
     @Path("/parieur/result")
     public int notifyResult(@QueryParam("userId") long userId, @QueryParam("result") int result) {
         try {
@@ -119,11 +78,5 @@ public class RestService {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public static void main(String[] args) {
-        RestService restService = new RestService();
-        System.out.println(restService.getMatchs(""));
-//        System.out.println(restService.getMatch(303864));
     }
 }

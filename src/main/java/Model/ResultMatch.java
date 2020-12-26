@@ -53,4 +53,15 @@ public class ResultMatch {
                 .add("scoreHomeTeam", scoreHomeTeam)
                 .add("scoreAwayTeam", scoreAwayTeam).build();
     }
+
+    public ResultMatch fromJsonObject(JsonObject jsonObject) {
+        if (jsonObject.containsKey("id")) {
+            this.setId(jsonObject.getInt("id"));
+        }
+
+        this.setScoreAwayTeam(jsonObject.getInt("scoreAwayTeam"));
+        this.setScoreHomeTeam(jsonObject.getInt("scoreHomeTeam"));
+        this.setWinner(jsonObject.getString("winner"));
+        return this;
+    }
 }
