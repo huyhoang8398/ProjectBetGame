@@ -1,6 +1,7 @@
 package View;
 
-import Controller.AministrateurController;
+import Controller.AdministrateurController;
+import Controller.LoginController;
 import Controller.ParieurController;
 import Model.*;
 
@@ -16,9 +17,11 @@ public class Login implements Serializable {
     String password;
     boolean userLogined = false;
     @EJB
-    AministrateurController administrateurController;
+    AdministrateurController administrateurController;
     @EJB
     ParieurController parieurController;
+    @EJB
+    LoginController loginController;
 
     public Login() {
     }
@@ -48,14 +51,15 @@ public class Login implements Serializable {
     }
 
     public void test() {
-        Bookmakeur bookmakeur = new Bookmakeur();
-        bookmakeur.setCote(new Cote());
-        bookmakeur.setMatcheHost(new Matche());
-        UserAccount userAccount = new UserAccount();
-        userAccount.setUsername("1");
-        bookmakeur.setUserAccount(userAccount);
-        administrateurController.createBookmakeur(bookmakeur);
+        UserAccount admin = new UserAccount();
+        admin.setRole(2);
+        admin.setUsername("admin");
+        admin.setPassword("admin");
+        administrateurController.createAccount(admin);
     }
 
-    //TODO login func
+    public Integer login(String username, String password) {
+        return loginController.checkLogin(username, password);
+    }
+
 }

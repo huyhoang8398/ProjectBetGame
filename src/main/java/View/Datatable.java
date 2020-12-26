@@ -1,6 +1,6 @@
 package View;
 
-import Controller.AministrateurController;
+import Controller.AdministrateurController;
 import Model.*;
 
 import javax.ejb.EJB;
@@ -14,7 +14,7 @@ import java.util.List;
 public class Datatable implements Serializable {
 
     @EJB
-    AministrateurController administrateurController;
+    AdministrateurController administrateurController;
 
     List<Bookmakeur> bookmakeurs;
     List<Parieur> parieurs;

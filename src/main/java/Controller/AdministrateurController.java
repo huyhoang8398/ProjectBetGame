@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Stateless
-public class AministrateurController {
+public class AdministrateurController {
     @PersistenceContext
     private EntityManager em;
 
@@ -65,22 +65,32 @@ public class AministrateurController {
     }
 
     public long createParieur(Parieur parieur) {
-        parieur.setMoney(1000); // 1000 Limcoin
-        em.persist(parieur);
-        em.persist(parieur.getUserAccount());
-        em.persist(parieur.getPariLst());
-        return parieur.getId();
+        UserAccount userAccount = parieur.getUserAccount();
+        UserAccount userAccountFound = em.find(UserAccount.class, userAccount.getUsername());
+        if(userAccountFound == null) {
+            parieur.setMoney(1000); // 1000 Limcoin
+            em.persist(parieur);
+            em.persist(parieur.getUserAccount());
+//            em.persist(parieur.getPariLst());
+            return parieur.getId();
+        }
+        return -1;
     }
 
     public Parieur getParieur(long id){
         return em.find(Parieur.class, id);
     }
 
-    public void updateParieur(Parieur parieurFace) {
-        em.merge(parieurFace);
+    public void updateParieur(Parieur parieur) {
+        em.merge(parieur);
     }
 
     public void deleteParieur(Parieur parieurFace) {
         em.remove(em.contains(parieurFace) ? parieurFace : em.merge(parieurFace));
+    }
+
+    public String createAccount(UserAccount userAccount) {
+        em.persist(userAccount);
+        return userAccount.getUsername();
     }
 }

@@ -12,11 +12,9 @@ public class LoginController {
     @PersistenceContext
     private EntityManager em;
 
-    public boolean checkLogin(String username, String password) {
+    public Integer checkLogin(String username, String password) {
         UserAccount userAccount = em.find(UserAccount.class, username);
-        if (userAccount != null) {
-            return userAccount.getPassword().equals(password);
-        }
-        return false;
+        if (userAccount != null && userAccount.getPassword().equals(password)) return userAccount.getRole();
+        return null;
     }
 }

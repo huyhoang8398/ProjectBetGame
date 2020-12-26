@@ -1,8 +1,10 @@
 package View;
 
+import Controller.ParieurController;
 import Model.Matche;
 import Model.Pari;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,30 +18,13 @@ public class ParieurFace implements Serializable {
     long id;
     String name;
     int money;
-
+    @EJB
+    ParieurController data;
     List<Matche> macths;
 
     @Inject
     DetailMatch detailMatch;
 
-//    public JsonArray getListOfMatch(String search) {
-//        JsonArray value = Json.createArrayBuilder()
-//                .add(Json.createObjectBuilder()
-//                        .add("id", 124)
-//                        .add("homeTeam", "Crystal Palace FC")
-//                        .add("awayTeam", "Leicester City FC"))
-//                .add(Json.createObjectBuilder()
-//                        .add("id", 125)
-//                        .add("homeTeam", "Manchester United FC")
-//                        .add("awayTeam", "Manchester City FC"))
-//                .add(Json.createObjectBuilder()
-//                        .add("id", 126)
-//                        .add("homeTeam", "Barcelona FC")
-//                        .add("awayTeam", "Athletic Bilbao FC"))
-//                .build();
-//
-//        return value;
-//    }
 
     public int pickPariMatch(int idmatch, Pari pari) {
         return 0;
@@ -79,17 +64,6 @@ public class ParieurFace implements Serializable {
     }
 
     public List<Matche> getMacths() {
-        Matche matche = new Matche();
-        matche.setId(1);
-        matche.setHomeTeam("Crrr");
-        matche.setAwayTeam("CSSr");
-
-        Matche matche2 = new Matche();
-
-        matche2.setId(2);
-        matche2.setHomeTeam("2");
-        matche2.setAwayTeam("2");
-
-        return Arrays.asList(matche, matche2);
+        return data.getListMatch("");
     }
 }
