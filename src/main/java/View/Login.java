@@ -73,4 +73,6 @@ public class Login implements Serializable {
         Bookmakeur bookmakeur = listBookmakeur.get(0);
         administrateurController.deleteBookmakeur(bookmakeur);
     }
+
+    //TODO login func
 }
