@@ -1,7 +1,6 @@
 package Service;
 
-import Controller.AministrateurController;
-import Controller.ParieurController;
+import Controller.AdministrateurController;
 import Model.Matche;
 import Model.Pari;
 import Model.Parieur;
@@ -31,7 +30,7 @@ public class ParieurRestService {
     private EntityManager em;
 
     @EJB
-    AministrateurController aministrateurController;
+    AdministrateurController aministrateurController;
 
     static Twitter twitter;
     String competition = "PL"; // Premier League
@@ -52,21 +51,19 @@ public class ParieurRestService {
     @Path("/matchs")
     @Produces(MediaType.APPLICATION_JSON)
     public JsonArray getMatchs(@QueryParam("search") String search) {
-        List<Matche> matches = new ArrayList();
-        if (search.isEmpty()) {
-            matches = FootballRestService.getScheduleMatch(competition);
-        } else {
+        List<Matche> matches = em.createQuery("select t from Matche t").getResultList();
+        if (!search.isEmpty()) {
             String searchstr = search.toLowerCase();
-            List<Matche> allMatches = FootballRestService.getScheduleMatch(competition);
-            for(Matche m : allMatches){
-                if(m.getHomeTeam().toLowerCase().contains(searchstr) || m.getAwayTeam().toLowerCase().contains(searchstr) || searchstr.contains(m.getId() + "")){
-                    matches.add(m);
+            List<Matche> matchFilter = new ArrayList<>();
+            for (Matche m : matches) {
+                if (m.getHomeTeam().toLowerCase().contains(searchstr) || m.getAwayTeam().toLowerCase().contains(searchstr) || searchstr.contains(m.getId() + "")) {
+                    matchFilter.add(m);
                 }
             }
         }
 
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-        for(Matche m : matches){
+        for (Matche m : matches) {
             arrayBuilder.add(m.toJsonObject());
         }
         JsonArray jsonArray = arrayBuilder.build();
@@ -77,7 +74,7 @@ public class ParieurRestService {
     @Path("/match/{idmatch}")
     @Produces(MediaType.APPLICATION_JSON)
     public JsonObject getMatch(@PathParam("idmatch") int idmatch) {
-        Matche matche = FootballRestService.getMatch(idmatch);
+        Matche matche = em.find(Matche.class, idmatch);
         return matche.toJsonObject();
     }
 
@@ -127,8 +124,8 @@ public class ParieurRestService {
         } else {
             parieur.setMoney(moneyleft);
             List<Pari> pariLst = parieur.getPariLst();
-            for(Pari p : pariLst){
-                if(p.getId() == pari.getId()){
+            for (Pari p : pariLst) {
+                if (p.getId() == pari.getId()) {
                     p.setMoney(pari.getMoney());
                     break;
                 }
@@ -155,7 +152,7 @@ public class ParieurRestService {
         Parieur parieur = aministrateurController.getParieur(userId);
         List<Pari> pariLst = parieur.getPariLst();
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-        for(Pari p : pariLst){
+        for (Pari p : pariLst) {
             arrayBuilder.add(p.toJsonObject());
         }
         JsonArray jsonArray = arrayBuilder.build();
