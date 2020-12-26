@@ -3,29 +3,61 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-    <title>Title</title>
-</h:head>
-<h:body>
-    <h:outputLabel>
-        <h:form>
-            <div>
-                <h:outputLabel value="username"/><h:inputText id="username" value="#{login.username}"
-                                                              required="true"/>
-            </div>
-            <div>
-                <h:outputLabel value="password"/><h:inputSecret id="password" value="#{login.password}"
-                                                                required="true"/>
-            </div>
-            <h:commandButton action="submit" value="Submit"/>
-        </h:form>
-    </h:outputLabel>
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
-    <h:form>
-        <h:commandButton value="submit" action="#{login.test()}"/>
-        <h:commandButton value="submit" action="moveToData"/>
-    </h:form>
+<h:head>
+    <title>Signin</title>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="./login.css"/>
+</h:head>
+<body>
+<h1>LocalBet</h1>
+<div class="main">
+    <div class="column">
+        <form action="">
+            <div class="nes-field">
+                <label for="name_field">Username</label>
+                <h:inputText class="nes-input" pt:placeholder="Enter Username*" required="true" value="#{login.username}"/>
+            </div>
+            <div class="nes-field">
+                <label for="name_field">Password</label>
+                <h:inputSecret class="nes-input" pt:placeholder="Enter Password*" required="true" value="#{login.password}"/>
+            </div>
+            <label>
+                <input type="checkbox" class="nes-checkbox" />
+                <span>Remember Me</span>
+            </label>
+        </form>
+        <button type="button" class="nes-btn is-primary">Login</button>
+    </div>
+    <div class="column">
+        <form action="">
+            <div class="nes-field">
+                <label for="name_field">Username</label>
+                <h:inputText class="nes-input" pt:placeholder="Enter Username*" required="true" value="#{register.username}" />
+            </div>
+            <div class="nes-field">
+                <label for="name_field">Password</label>
+                <h:inputSecret class="nes-input" pt:placeholder="Enter Password*" required="true" value="#{register.password}"/>
+            </div>
+            <div class="nes-field">
+                <label for="name_field">Confirm Password</label>
+                <h:inputSecret class="nes-input" pt:placeholder="Enter Confirm Password*" required="true" value="#{register.confirmPassword}"/>
+            </div>
+
+            <div class="nes-field">
+                <label for="name_field">Email</label>
+                <h:inputText type="text" class="nes-input" pt:placeholder="Enter Twitter Username*" required="true" value="#{register.twitterName}"/>
+            </div>
+            <label>
+                <input type="checkbox" class="nes-checkbox" value="true" />
+                <span>Remember Me</span>
+            </label>
+        </form>
+        <button type="button" class="nes-btn is-primary">Register</button>
+    </div>
+</div>
+</body>
 </h:body>
 </html>
