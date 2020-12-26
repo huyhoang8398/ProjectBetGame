@@ -11,12 +11,13 @@
         <class>Model.ResultMatch</class>
         <class>Model.Cote</class>
         <class>Model.Parieur</class>
+        <class>Model.UserAccount</class>
         <properties>
             <property name="eclipselink.target-database" value="DERBY"/>
             <!--            <property name="eclipselink.ddl-generation" value="DERBY"/>-->
             <property name="eclipselink.jdbc.url" value="jdbc:derby://localhost:1527/testDB;create=true"/>
             <property name="eclipselink.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-            <property name="eclipselink.jdbc.user" value="APP"/>
+            <property name="eclipselink.jdbc.userAccount" value="APP"/>
             <property name="eclipselink.jdbc.password" value="APP"/>
             <property name="eclipselink.deploy-on-startup" value="true" />
 <!--            <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>-->

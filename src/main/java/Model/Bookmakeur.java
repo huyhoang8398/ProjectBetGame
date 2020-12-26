@@ -12,13 +12,8 @@ public class Bookmakeur {
     @OneToOne
     Cote cote;
 
-    public Matche getMatchHost() {
-        return matcheHost;
-    }
-
-    public void setMatchHost(Matche matcheHost) {
-        this.matcheHost = matcheHost;
-    }
+    @OneToOne
+    UserAccount userAccount;
 
     public Cote getCote() {
         return cote;
@@ -34,5 +29,21 @@ public class Bookmakeur {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
+
+    public Matche getMatcheHost() {
+        return matcheHost;
+    }
+
+    public void setMatcheHost(Matche matcheHost) {
+        this.matcheHost = matcheHost;
     }
 }

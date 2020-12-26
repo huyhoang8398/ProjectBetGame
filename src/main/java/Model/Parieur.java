@@ -15,6 +15,9 @@ public class Parieur {
     @OneToMany
     List<Pari> pariLst;
 
+    @OneToOne
+    UserAccount userAccount;
+
     public Parieur() {
     }
 
@@ -68,5 +71,13 @@ public class Parieur {
 
     public void setPariLst(List<Pari> pari) {
         this.pariLst = pari;
+    }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 }

@@ -1,9 +1,7 @@
 package Controller;
 
 
-import Model.Bookmakeur;
-import Model.Matche;
-import Model.Parieur;
+import Model.*;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -30,31 +28,48 @@ public class AministrateurController {
         return list;
     }
 
+    public List<Cote> getListCote() {
+        List<Cote> list = em.createQuery("select t from Cote t").getResultList();
+        return list;
+    }
+
+    public List<Pari> getListPari() {
+        List<Pari> list = em.createQuery("select t from Pari t").getResultList();
+        return list;
+    }
+
+    public List<UserAccount> getUserAccounts() {
+        List<UserAccount> list = em.createQuery("select t from UserAccount t").getResultList();
+        return list;
+    }
+
     public long createBookmakeur(Bookmakeur bookmakeur) {
         em.persist(bookmakeur);
-        em.persist(bookmakeur.getMatchHost());
+        em.persist(bookmakeur.getMatcheHost());
         em.persist(bookmakeur.getCote());
+        em.persist(bookmakeur.getUserAccount());
         return bookmakeur.getId();
     }
 
     public long updateBookmakeur(Bookmakeur bookmakeur) {
         em.merge(bookmakeur);
-        em.merge(bookmakeur.getMatchHost());
+        em.merge(bookmakeur.getMatcheHost());
         em.merge(bookmakeur.getCote());
         return bookmakeur.getId();
     }
 
     public void deleteBookmakeur(Bookmakeur bookmakeurFace) {
         em.remove(em.contains(bookmakeurFace) ? bookmakeurFace : em.merge(bookmakeurFace));
-        em.remove(em.contains(bookmakeurFace.getMatchHost()) ? bookmakeurFace.getMatchHost() : em.merge(bookmakeurFace.getMatchHost()));
+        em.remove(em.contains(bookmakeurFace.getMatcheHost()) ? bookmakeurFace.getMatcheHost() : em.merge(bookmakeurFace.getMatcheHost()));
         em.remove(em.contains(bookmakeurFace.getCote()) ? bookmakeurFace.getCote() : em.merge(bookmakeurFace.getCote()));
     }
 
-    public long createParieur(Parieur parieurFace) {
-        parieurFace.setMoney(1000); // 1000 Limcoin
-        em.persist(parieurFace);
-        em.persist(parieurFace.getPariLst());
-        return parieurFace.getId();
+    public long createParieur(Parieur parieur) {
+        parieur.setMoney(1000); // 1000 Limcoin
+        em.persist(parieur);
+        em.persist(parieur.getUserAccount());
+        em.persist(parieur.getPariLst());
+        return parieur.getId();
     }
 
     public Parieur getParieur(long id){

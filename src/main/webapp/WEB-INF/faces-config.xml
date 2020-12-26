@@ -3,5 +3,11 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
-
+    <navigation-rule>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>moveToData</from-outcome>
+            <to-view-id>/datatable.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

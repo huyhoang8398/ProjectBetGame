@@ -54,7 +54,7 @@ public class BookmakeurController {
         Matche matcheFound = em.find(Matche.class, matche.getId());
         if (matcheFound == null) {
             Bookmakeur bookmakeur = em.find(Bookmakeur.class, hostId);
-            bookmakeur.setMatchHost(matche);
+            bookmakeur.setMatcheHost(matche);
             em.merge(bookmakeur);
             em.persist(matche);
             em.persist(matche.getResultmatch());
