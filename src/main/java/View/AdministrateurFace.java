@@ -83,4 +83,9 @@ public class AdministrateurFace implements Serializable {
         controller.updateParieur(p);
         editable.put(id, false);
     }
+
+    public void deleteParieu(Long id) {
+        Parieur p = controller.getParieur(id);
+        controller.deleteParieur(p);
+    }
 }
