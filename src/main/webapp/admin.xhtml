@@ -27,8 +27,8 @@
         <h:column>
             <f:facet name="header">Name</f:facet>
             <h:outputLabel value="#{parier.name}" rendered="#{not administrateurFace.isEditable(parier.id)}"/>
-            <h:inputText value="#{parier.name}" rendered="#{administrateurFace.isEditable(parier.id)}" /> <br/>
             <h:form>
+                <h:inputText value="#{parier.name}" rendered="#{administrateurFace.isEditable(parier.id)}" /> <br/>
                 <h:commandButton value="Save" action="#{administrateurFace.updateName(parier.id, parier.name)}" rendered="#{administrateurFace.isEditable(parier.id)}" class="nes-btn is-success" style="margin-top: 10px"/>
                 <h:commandButton value="Cancel" action="#{administrateurFace.cancelButton(parier.id)}" rendered="#{administrateurFace.isEditable(parier.id)}" style="margin-left: 5px; margin-top: 10px" class="nes-btn is-error" />
             </h:form>

@@ -22,6 +22,7 @@ public class AdministrateurFace implements Serializable {
     List<Bookmakeur> bookmakeurs;
     List<Parieur> parieurs;
     HashMap<Long, Boolean> editable = new HashMap<>();
+    boolean isEditable = false;
 
     public void createParieur() {
 
@@ -53,11 +54,12 @@ public class AdministrateurFace implements Serializable {
     }
 
     public List<Parieur> getParieurs() {
-        parieurs = controller.getListParieur();
-        for (Parieur p : parieurs) {
-            System.out.println(p.getId() + "" + editable.get(p.getId()));
-            if(!editable.containsKey(p.getId())) {
-                editable.put(p.getId(), false);
+        if(!isEditable) {
+            parieurs = controller.getListParieur();
+            for (Parieur p : parieurs) {
+                if (!editable.containsKey(p.getId())) {
+                    editable.put(p.getId(), false);
+                }
             }
         }
         return parieurs;
@@ -69,6 +71,7 @@ public class AdministrateurFace implements Serializable {
     }
 
     public void editButton(Long id) {
+        isEditable = true;
         editable.put(id, true);
     }
 
@@ -77,9 +80,9 @@ public class AdministrateurFace implements Serializable {
     }
 
     public void updateName(Long id, String name) {
+        isEditable = true;
         Parieur p = controller.getParieur(id);
         p.setName(name);
-        System.out.println("test " + name);
         controller.updateParieur(p);
         editable.put(id, false);
     }
