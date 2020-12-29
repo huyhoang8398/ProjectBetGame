@@ -14,6 +14,7 @@
 <body>
 
 <div class="container pt-3">
+    <h:form>
     <ui:repeat value="#{detailMatch.detailMatch}" var="match">
     <h2 class="nes-text is-success" style="text-align: center">Match ID #{detailMatch.id}</h2>
     <p class="nes-text is-warning" style="text-align: center" >Date: #{match.startDate}</p>
@@ -39,8 +40,14 @@
                 </div>
             </div>
         </div>
+        <div class="nes-field justify-content-center">
+            <label for="moneyBet">Amount</label>
+            <h:inputText class="nes-input" id="moneyBet" pt:placeholder="Enter amount of money you want to bet*" required="true" value="#{detailMatch.amount}" />
+        </div>
     </div>
     </ui:repeat>
+
+    </h:form>
 </div>
 
 </body>

@@ -1,21 +1,18 @@
 package View;
 
-import Controller.BookmakeurController;
 import Controller.ParieurController;
 import Model.Matche;
-
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.json.JsonObject;
 import java.io.Serializable;
-import java.util.List;
 
 @Named
 @SessionScoped
 
 public class DetailMatch implements Serializable {
     private int id;
+    private int amount;
     @EJB
     ParieurController data;
     Matche match;
@@ -34,6 +31,14 @@ public class DetailMatch implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public Matche getDetailMatch() {
