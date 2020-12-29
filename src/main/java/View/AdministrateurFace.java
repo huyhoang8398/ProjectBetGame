@@ -1,7 +1,9 @@
 package View;
 
 import Controller.AdministrateurController;
+import Controller.BookmakeurController;
 import Model.Bookmakeur;
+import Model.Matche;
 import Model.Parieur;
 
 import javax.ejb.EJB;
@@ -18,7 +20,6 @@ import java.util.List;
 public class AdministrateurFace implements Serializable {
     @EJB
     AdministrateurController controller;
-
     List<Bookmakeur> bookmakeurs;
     List<Parieur> parieurs;
     HashMap<Long, Boolean> editable = new HashMap<>();
@@ -85,5 +86,10 @@ public class AdministrateurFace implements Serializable {
         p.setName(name);
         controller.updateParieur(p);
         editable.put(id, false);
+    }
+
+    public void deleteParieu(Long id) {
+        Parieur p = controller.getParieur(id);
+        controller.deleteParieur(p);
     }
 }

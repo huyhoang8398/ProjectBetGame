@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -12,15 +14,14 @@
     <link rel="stylesheet" href="gamelist.css" />
 </head>
 <body>
+
 <h1>Game list</h1>
 <div class="container">
     <h:inputText type="text" class="form-control nes-textarea mb-4" pt:placeholder="Search..." aria-label=""
                  aria-describedby="basic-addon1" id="search" onkeyup="MatchSearch()">
     </h:inputText>
-    <h:commandButton value="Your staked match" class="nes-btn is-primary mb-4" />
-    <h2 class="nes-text is-primary">Available matches</h2>
     <ul id="game-matchs" class="list-group mb-5">
-        <ui:repeat var="match" value="#{parieurFace.macths}">
+        <ui:repeat var="match" value="#{bookmakeurFace.macths}">
             <li class="list-group-item list-group-item-action list-group-item-info" id="#{match.id}">
                 <p>#{match.id}</p>
                 <div class="row justify-content-center">
@@ -40,18 +41,17 @@
                     </div>
                 </div>
                 <h:form>
-                    <h:commandButton action="#{parieurFace.detailMatch(match.id)}" value="Bet" class="nes-btn is-warning"/>
+                    <h:commandButton action="#{bookmakeurFace.createBookmaker(match)}" value="Select" class="nes-btn is-warning"/>
                 </h:form>
             </li>
         </ui:repeat>
     </ul>
 </div>
-
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script type="text/javascript" src="script.js" ></script>
 
 </body>
+
 </html>

@@ -3,6 +3,9 @@ package Model;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Entity
 public class Matche {
@@ -39,7 +42,10 @@ public class Matche {
     }
 
     public String getStartDate() {
-        return startDate;
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm", Locale.ENGLISH);
+        LocalDateTime date = LocalDateTime.parse(startDate, inputFormatter);
+        return outputFormatter.format(date);
     }
 
     public void setStartDate(String startDate) {

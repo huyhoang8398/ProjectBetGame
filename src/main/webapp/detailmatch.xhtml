@@ -1,18 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f = "http://java.sun.com/jsf/core">
-
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <head>
-    <title>Match Detail</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <link rel="stylesheet" href="gamelist.css" />
 </head>
 <body>
-    <div class="container card" style="width: 18rem;">
-        <h1>#{detailMatch.id}</h1>
+
+<div class="container pt-3">
+    <ui:repeat value="#{detailMatch.detailMatch}" var="match">
+    <h2 class="nes-text is-success" style="text-align: center">Match ID #{detailMatch.id}</h2>
+    <p class="nes-text is-warning" style="text-align: center" >Date: #{match.startDate}</p>
+    <div class="row justify-content-center pt-3">
+        <div class="col-4">
+            <div class="card bg-light mb-3" style="max-width: 18rem;">
+               <div class="card-header">#{match.name}</div>
+                <div class="card-body">
+                    <h5 class="card-title">#{match.homeTeam}</h5>
+                    <p class="card-text">Home team</p>
+                    <h:commandButton value="Bet" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                <div class="card-header">#{match.name}</div>
+                <div class="card-body">
+                    <h5 class="card-title">#{match.awayTeam}</h5>
+                    <p class="card-text">Away Team</p>
+                    <h:commandButton value="Bet" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
+                </div>
+            </div>
+        </div>
     </div>
+    </ui:repeat>
+</div>
 
 </body>
 </html>

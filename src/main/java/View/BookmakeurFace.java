@@ -1,11 +1,18 @@
 package View;
 
+import Controller.AdministrateurController;
+import Controller.BookmakeurController;
+import Controller.ParieurController;
+import Model.Bookmakeur;
 import Model.Cote;
 import Model.Matche;
+import Model.UserAccount;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.List;
 
 @Named
 @SessionScoped
@@ -13,6 +20,14 @@ public class BookmakeurFace implements Serializable {
     long id;
     Matche matcheHost;
     Cote cote;
+
+    @EJB
+    BookmakeurController controller;
+
+    @EJB
+    AdministrateurController administrateurController;
+
+    List<Matche> macths;
 
     public Matche getMatchHost() {
         return matcheHost;
@@ -36,5 +51,22 @@ public class BookmakeurFace implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public List<Matche> getMacths() {
+        return controller.getScheduleMatche();
+    }
+
+    public void createBookmaker(Matche matche ){
+        Bookmakeur bookmakeur = new Bookmakeur();
+        bookmakeur.setMatcheHost(matche);
+        UserAccount bookmaker1 = new UserAccount();
+        bookmaker1.setUsername("bookmaker" + matche.getId());
+        bookmaker1.setPassword("bookmaker" + matche.getId());
+        bookmaker1.setRole(1);
+        bookmakeur.setUserAccount(bookmaker1);
+        Cote cote = new Cote();
+        bookmakeur.setCote(cote);
+        administrateurController.createBookmakeur(bookmakeur);
     }
 }

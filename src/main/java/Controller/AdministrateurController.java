@@ -44,11 +44,16 @@ public class AdministrateurController {
     }
 
     public long createBookmakeur(Bookmakeur bookmakeur) {
-        em.persist(bookmakeur);
-        em.persist(bookmakeur.getMatcheHost());
-        em.persist(bookmakeur.getCote());
-        em.persist(bookmakeur.getUserAccount());
-        return bookmakeur.getId();
+        Matche matche = em.find(Matche.class, bookmakeur.getMatcheHost().getId());
+        if(matche == null) {
+            em.persist(bookmakeur);
+            em.persist(bookmakeur.getMatcheHost());
+            em.persist(bookmakeur.getMatcheHost().getResultmatch());
+            em.persist(bookmakeur.getCote());
+            em.persist(bookmakeur.getUserAccount());
+            return bookmakeur.getId();
+        }
+        return -1;
     }
 
     public long updateBookmakeur(Bookmakeur bookmakeur) {
@@ -81,12 +86,17 @@ public class AdministrateurController {
         return em.find(Parieur.class, id);
     }
 
+    public Bookmakeur getBookmakeur(long id){
+        return em.find(Bookmakeur.class, id);
+    }
+
     public void updateParieur(Parieur parieur) {
         em.merge(parieur);
     }
 
     public void deleteParieur(Parieur parieurFace) {
         em.remove(em.contains(parieurFace) ? parieurFace : em.merge(parieurFace));
+        em.remove(em.contains(parieurFace.getUserAccount()) ? parieurFace.getUserAccount() : em.merge(parieurFace.getUserAccount()));
     }
 
     public String createAccount(UserAccount userAccount) {

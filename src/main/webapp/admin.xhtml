@@ -17,7 +17,6 @@
 <div class="container">
 
 <div style="margin-bottom: 30px" class="nes-table-responsive">
-
     <h:outputLabel value="Parieus Table"/>
     <h:dataTable value="#{administrateurFace.parieurs}" var="parier" class="nes-table is-bordered is-centered">
         <h:column>
@@ -41,32 +40,30 @@
             <f:facet name="header"></f:facet>
             <h:form>
                 <h:commandButton action="#{administrateurFace.editButton(parier.id)}" class="nes-btn is-primary" value="Edit" />
-                <h:commandButton class="nes-btn is-error" value="Delete" style="margin-left: 5px"/>
+                <h:commandButton action="#{administrateurFace.deleteParieu(parier.id)}" class="nes-btn is-error" value="Delete" style="margin-left: 5px"/>
             </h:form>
         </h:column>
     </h:dataTable>
 </div>
-
-<div class="nes-table-responsive">
     <p>Bookmakers</p>
-    <table class="nes-table is-bordered is-centered">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Thou hast had a good morning</td>
-            <td>Thou hast had a good afternoon</td>
-        </tr>
-        <tr>
-            <td>Thou hast had a good morning</td>
-            <td>Thou hast had a good night</td>
-        </tr>
-        </tbody>
-    </table>
+
+    <h:form>
+        <h:commandButton value="Create Bookmaker" action="createBookmaker" class="nes-btn is-primary"/>
+    </h:form>
+    <br/>
+    <h:outputLabel value="Bookmaker Table"/>
+<div class="nes-table-responsive">
+    <h:dataTable value="#{administrateurFace.bookmakeurs}" var="bookmaker" class="nes-table is-bordered is-centered">
+        <h:column>
+            <f:facet name="header">UserID</f:facet>
+            <h:outputLabel value="#{bookmaker.id}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Match ID</f:facet>
+            <h:outputLabel value="#{bookmaker.matcheHost}"/>
+        </h:column>
+    </h:dataTable>
+
 </div>
 </div>
 </body>
