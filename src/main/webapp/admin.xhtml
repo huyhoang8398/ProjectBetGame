@@ -59,8 +59,12 @@
             <h:outputLabel value="#{bookmaker.id}"/>
         </h:column>
         <h:column>
+            <f:facet name="header">Username</f:facet>
+            <h:outputLabel value="#{bookmaker.userAccount.username}"/>
+        </h:column>
+        <h:column>
             <f:facet name="header">Match ID</f:facet>
-            <h:outputLabel value="#{bookmaker.matcheHost}"/>
+            <h:outputLabel value="#{bookmaker.matcheHost.id}"/>
         </h:column>
     </h:dataTable>
 
