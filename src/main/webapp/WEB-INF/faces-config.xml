@@ -11,6 +11,11 @@
             <if>#{login.login(login.username,login.password) == 2}</if>
             <to-view-id>/admin.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <if>#{login.login(login.username,login.password) == 0}</if>
+            <to-view-id>/gamelist.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
 
     <navigation-rule>

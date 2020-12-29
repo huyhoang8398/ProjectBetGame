@@ -61,8 +61,8 @@ public class BookmakeurFace implements Serializable {
         Bookmakeur bookmakeur = new Bookmakeur();
         bookmakeur.setMatcheHost(matche);
         UserAccount bookmaker1 = new UserAccount();
-        bookmaker1.setUsername("bookmaker1");
-        bookmaker1.setPassword("bookmaker1");
+        bookmaker1.setUsername("bookmaker" + matche.getId());
+        bookmaker1.setPassword("bookmaker" + matche.getId());
         bookmaker1.setRole(1);
         bookmakeur.setUserAccount(bookmaker1);
         Cote cote = new Cote();

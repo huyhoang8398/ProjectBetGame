@@ -62,6 +62,26 @@ public class ParieurController {
         return null;
     }
 
+    public Matche getDetailMatch(Integer id) {
+        ClientConfig cf = new ClientConfig();
+        Client c = ClientBuilder.newClient(cf);
+        WebTarget target = c.target("http://localhost:8080/ProjectBetGame-1.0-SNAPSHOT/rest/parieur/match/" + id);
+
+        Invocation.Builder inBuilder = target.request(MediaType.APPLICATION_JSON);
+        Response response = inBuilder.get();
+        if (response.getStatus() == 200) {
+            String respstring = response.readEntity(String.class);
+            StringReader stringReader = new StringReader(respstring);
+            JsonReader reader = Json.createReader(stringReader);
+            JsonObject jsonObject = reader.readObject();
+            Matche m = new Matche();
+            m.fromJsonObject(jsonObject);
+            System.out.println("Test" + m.getAwayTeam() + m.getHomeTeam());
+            return m;
+        }
+        return null;
+    }
+
     public long createPari(long userId, Pari pari) {
         ClientConfig cf = new ClientConfig();
         Client c = ClientBuilder.newClient(cf);

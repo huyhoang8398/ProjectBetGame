@@ -51,27 +51,16 @@
         <h:commandButton value="Create Bookmaker" action="createBookmaker" class="nes-btn is-primary"/>
     </h:form>
     <br/>
-
-<div class="nes-table-responsive">
-
-
     <h:outputLabel value="Bookmaker Table"/>
+<div class="nes-table-responsive">
     <h:dataTable value="#{administrateurFace.bookmakeurs}" var="bookmaker" class="nes-table is-bordered is-centered">
         <h:column>
             <f:facet name="header">UserID</f:facet>
             <h:outputLabel value="#{bookmaker.id}"/>
         </h:column>
         <h:column>
-            <f:facet name="header">User Account</f:facet>
-            <h:outputLabel value="#{bookmaker.userAccount}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Cote</f:facet>
-            <h:outputLabel value="#{bookmaker.cote}" rendered="#{not administrateurFace.isEditable(parier.id)}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Match Host</f:facet>
-            <h:outputLabel value="#{bookmaker.matcheHost}" rendered="#{not administrateurFace.isEditable(parier.id)}"/>
+            <f:facet name="header">Match ID</f:facet>
+            <h:outputLabel value="#{bookmaker.matcheHost}"/>
         </h:column>
     </h:dataTable>
 
