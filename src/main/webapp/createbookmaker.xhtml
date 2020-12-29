@@ -17,6 +17,16 @@
 
 <h1>Game list</h1>
 <div class="container">
+    <h:form>
+    <div class="nes-field">
+        <label for="bookmakerUsername">Username for Bookmaker</label>
+        <h:inputText class="nes-input" id="bookmakerUsername" pt:placeholder="Enter Username*" required="true" value="#{bookmakeurFace.username}" />
+    </div>
+    <div class="nes-field mb-4">
+        <label for="bookmakerPassword">Password</label>
+        <h:inputSecret class="nes-input" id="bookmakerPassword" pt:placeholder="Enter Password*" required="true" value="#{bookmakeurFace.password}" />
+    </div>
+    <h2 class="nes-text is-primary">Available matches</h2>
     <h:inputText type="text" class="form-control nes-textarea mb-4" pt:placeholder="Search..." aria-label=""
                  aria-describedby="basic-addon1" id="search" onkeyup="MatchSearch()">
     </h:inputText>
@@ -32,20 +42,15 @@
                         <h4>#{match.awayTeam}</h4>
                     </div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-sm">
-                        <p>50</p>
-                    </div>
-                    <div class="col-sm">
-                        <p>50</p>
-                    </div>
-                </div>
+                <p>#{match.name}</p>
+                <p>#{match.startDate}</p>
                 <h:form>
                     <h:commandButton action="#{bookmakeurFace.createBookmaker(match)}" value="Select" class="nes-btn is-warning"/>
                 </h:form>
             </li>
         </ui:repeat>
     </ul>
+    </h:form>
 </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
