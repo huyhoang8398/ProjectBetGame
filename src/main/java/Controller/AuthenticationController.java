@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class LoginController {
+public class AuthenticationController {
 
     @PersistenceContext
     private EntityManager em;

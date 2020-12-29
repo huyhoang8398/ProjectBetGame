@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FootballRestService {
+    static List<Matche> matchlistSave = new ArrayList();
+    static long timeSave = 0;
     static String tokenAPI = "b5e4ba82e7494192945dd5d1042fbef2";
     static Client c;
 
@@ -43,19 +45,26 @@ public class FootballRestService {
     }
 
     public static List<Matche> getScheduleMatch(String competitionID) {
-        WebTarget target = c.target("http://api.football-data.org/v2/competitions/" + competitionID);
-        Invocation.Builder builder = target.request().header("X-Auth-Token", tokenAPI);
-        Response response = builder.get();
-        int matchday = 0;
-        if (response.getStatus() == 200) {
-            String respstring = response.readEntity(String.class);
-            StringReader stringReader = new StringReader(respstring);
-            JsonReader reader = Json.createReader(stringReader);
-            JsonObject jsonObject = reader.readObject();
-            JsonObject currentSeason = jsonObject.getJsonObject("currentSeason");
-            matchday = currentSeason.getInt("currentMatchday");
+        long currentTimeMillis = System.currentTimeMillis();
+        if(currentTimeMillis - timeSave > 60000) {
+            WebTarget target = FootballRestService.c.target("http://api.football-data.org/v2/competitions/" + competitionID);
+            Invocation.Builder builder = target.request().header("X-Auth-Token", tokenAPI);
+            Response response = builder.get();
+            int matchday = 0;
+            if (response.getStatus() == 200) {
+                String respstring = response.readEntity(String.class);
+                StringReader stringReader = new StringReader(respstring);
+                JsonReader reader = Json.createReader(stringReader);
+                JsonObject jsonObject = reader.readObject();
+                JsonObject currentSeason = jsonObject.getJsonObject("currentSeason");
+                matchday = currentSeason.getInt("currentMatchday");
+            } else {
+                System.err.println("getScheduleMatch Fail");
+            }
+            matchlistSave = getListOfMatch(competitionID, matchday + 1);
+            timeSave = currentTimeMillis;
         }
-        return getListOfMatch(competitionID, matchday + 1);
+        return matchlistSave;
     }
 
     public static List<Matche> getListOfMatch(String competitionID, int matchday) {

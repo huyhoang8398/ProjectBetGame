@@ -1,7 +1,7 @@
 package View;
 
 import Controller.AdministrateurController;
-import Controller.LoginController;
+import Controller.AuthenticationController;
 import Controller.ParieurController;
 import Model.*;
 
@@ -21,7 +21,7 @@ public class Login implements Serializable {
     @EJB
     ParieurController parieurController;
     @EJB
-    LoginController loginController;
+    AuthenticationController authenticationController;
 
     public Login() {
     }
@@ -59,7 +59,7 @@ public class Login implements Serializable {
     }
 
     public Integer login(String username, String password) {
-        return loginController.checkLogin(username, password);
+        return authenticationController.checkLogin(username, password);
     }
 
 }

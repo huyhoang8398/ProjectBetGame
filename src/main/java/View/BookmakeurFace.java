@@ -57,7 +57,7 @@ public class BookmakeurFace implements Serializable {
         return controller.getScheduleMatche();
     }
 
-    public void createBookmaker(Matche matche ){
+    public long createBookmaker(Matche matche ){
         Bookmakeur bookmakeur = new Bookmakeur();
         bookmakeur.setMatcheHost(matche);
         UserAccount bookmaker1 = new UserAccount();
@@ -67,6 +67,6 @@ public class BookmakeurFace implements Serializable {
         bookmakeur.setUserAccount(bookmaker1);
         Cote cote = new Cote();
         bookmakeur.setCote(cote);
-        administrateurController.createBookmakeur(bookmakeur);
+        return administrateurController.createBookmakeur(bookmakeur);
     }
 }
