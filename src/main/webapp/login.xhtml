@@ -38,25 +38,25 @@
         <h:form id="registerForm">
             <h:messages id="registStatus" infoStyle="color:darkorange"/>
             <div class="nes-field">
-                <label for="name_field">Username</label>
+                <label for="registerUsername">Username</label>
                 <h:inputText class="nes-input" id="registerUsername" pt:placeholder="Enter Username*" required="true" requiredMessage="You must enter your username" value="#{register.username}" />
             </div>
             <div class="nes-field">
-                <label for="name_field">Full Name</label>
+                <label for="registerFullName">Full Name</label>
                 <h:inputText class="nes-input" id="registerFullName" pt:placeholder="Enter your name*" required="true" requiredMessage="You must enter your fullname" value="#{register.name}" />
             </div>
             <div class="nes-field">
-                <label for="name_field">Password</label>
+                <label for="registerPassword">Password</label>
                 <h:inputSecret class="nes-input" id="registerPassword" pt:placeholder="Enter Password*" required="true" requiredMessage="You must enter your password" value="#{register.password}"/>
             </div>
             <div class="nes-field">
-                <label for="name_field">Confirm Password</label>
+                <label for="confirmPassword">Confirm Password</label>
                 <h:inputSecret  id="confirmPassword" class="nes-input" pt:placeholder="Enter Confirm Password*" required="true" requiredMessage="You must enter your password" value="#{register.confirmPassword}"/>
             </div>
             <h:message for="confirmPassword" class="error" id="confirmPasswordError" />
 
             <div class="nes-field">
-                <label for="name_field">Twitter</label>
+                <label for="registerTwitter">Twitter</label>
                 <h:inputText type="text" class="nes-input" id="registerTwitter" pt:placeholder="Enter Twitter Username*" required="true" requiredMessage="You must enter your twitter username" value="#{register.twitterName}"/>
             </div>
             <br/>

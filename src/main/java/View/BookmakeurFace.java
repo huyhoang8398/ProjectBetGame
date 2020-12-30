@@ -2,7 +2,6 @@ package View;
 
 import Controller.AdministrateurController;
 import Controller.BookmakeurController;
-import Controller.ParieurController;
 import Model.Bookmakeur;
 import Model.Cote;
 import Model.Matche;
@@ -20,6 +19,9 @@ public class BookmakeurFace implements Serializable {
     long id;
     Matche matcheHost;
     Cote cote;
+
+    String username;
+    String password;
 
     @EJB
     BookmakeurController controller;
@@ -57,14 +59,31 @@ public class BookmakeurFace implements Serializable {
         return controller.getScheduleMatche();
     }
 
-    public long createBookmaker(Matche matche ){
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public long createBookmaker(Matche matche){
+        System.out.println("test" + username + password + matche);
         Bookmakeur bookmakeur = new Bookmakeur();
         bookmakeur.setMatcheHost(matche);
-        UserAccount bookmaker1 = new UserAccount();
-        bookmaker1.setUsername("bookmaker" + matche.getId());
-        bookmaker1.setPassword("bookmaker" + matche.getId());
-        bookmaker1.setRole(1);
-        bookmakeur.setUserAccount(bookmaker1);
+        UserAccount bookmaker = new UserAccount();
+        bookmaker.setUsername(username);
+        bookmaker.setPassword(password);
+        bookmaker.setRole(1);
+        bookmakeur.setUserAccount(bookmaker);
         Cote cote = new Cote();
         bookmakeur.setCote(cote);
         return administrateurController.createBookmakeur(bookmakeur);
