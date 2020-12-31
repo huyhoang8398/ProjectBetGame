@@ -44,4 +44,8 @@ public class DetailMatch implements Serializable {
     public Matche getDetailMatch() {
         return data.getDetailMatch(id);
     }
+
+    public void betMatch() {
+
+    }
 }
