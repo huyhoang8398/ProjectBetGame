@@ -6,9 +6,11 @@ import Controller.ParieurController;
 import Model.*;
 
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.Map;
 
 @Named
 @ViewScoped

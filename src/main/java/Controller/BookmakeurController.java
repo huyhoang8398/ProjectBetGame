@@ -50,19 +50,6 @@ public class BookmakeurController {
         return matche;
     }
 
-//    public int pickMatche(int hostId, Matche matche) {
-//        Matche matcheFound = em.find(Matche.class, matche.getId());
-//        if (matcheFound == null) {
-//            Bookmakeur bookmakeur = em.find(Bookmakeur.class, hostId);
-//            bookmakeur.setMatcheHost(matche);
-//            em.merge(bookmakeur);
-//            em.persist(matche);
-//            em.persist(matche.getResultmatch());
-//            return matche.getId();
-//        }
-//        return -1;
-//    }
-
     public int removeMatche(Matche matche) {
         em.remove(matche);
         em.remove(matche.getResultmatch());

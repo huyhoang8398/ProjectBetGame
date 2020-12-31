@@ -18,6 +18,11 @@ public class AdministrateurController {
         return list;
     }
 
+    public List<Parieur> getListParieurRank() {
+        List<Parieur> list = em.createQuery("select t from Parieur t order by t.money desc").getResultList();
+        return list;
+    }
+
     public List<Bookmakeur> getListBookmakeur() {
         List<Bookmakeur> list = em.createQuery("select t from Bookmakeur t").getResultList();
         return list;
@@ -76,7 +81,6 @@ public class AdministrateurController {
             parieur.setMoney(1000); // 1000 Limcoin
             em.persist(parieur);
             em.persist(parieur.getUserAccount());
-//            em.persist(parieur.getPariLst());
             return parieur.getId();
         }
         return -1;
