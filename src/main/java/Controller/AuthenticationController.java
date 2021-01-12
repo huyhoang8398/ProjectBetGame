@@ -3,7 +3,6 @@ package Controller;
 import Model.UserAccount;
 
 import javax.ejb.Stateful;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 

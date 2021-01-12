@@ -10,6 +10,8 @@ import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
@@ -20,6 +22,10 @@ import java.util.List;
 
 @Stateless
 public class ParieurController {
+
+    @PersistenceContext
+    private EntityManager em;
+
     public List<Matche> getListMatch(String search) {
         ClientConfig cf = new ClientConfig();
         Client c = ClientBuilder.newClient(cf);
@@ -157,6 +163,14 @@ public class ParieurController {
             return pariList;
         }
         return null;
+    }
+
+    public long createPariLocal(long userId, Pari pari) {
+//        em.persist(pari.getMatche().getResultmatch());
+//        em.persist(pari.getMatche());
+        em.persist(pari);
+        em.persist(pari.getCote());
+        return -1;
     }
 
 //    public static void main(String[] args) {

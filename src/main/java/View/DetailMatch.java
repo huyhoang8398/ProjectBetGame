@@ -1,15 +1,12 @@
 package View;
 
-import Controller.AuthenticationController;
+import Controller.AdministrateurController;
 import Controller.ParieurController;
-import Model.Cote;
-import Model.Matche;
-import Model.Pari;
-import Model.UserAccount;
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+import Model.*;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 
@@ -19,12 +16,16 @@ import java.io.Serializable;
 public class DetailMatch implements Serializable {
     private int id;
     private int amount;
+    private int moneyLeft;
+
+
     @EJB
     ParieurController data;
     Matche match;
 
+    @Inject Login login;
     @EJB
-    AuthenticationController authController;
+    AdministrateurController administrateurController;
 
     public Matche getMatch() {
         return match;
@@ -54,19 +55,56 @@ public class DetailMatch implements Serializable {
         return data.getDetailMatch(id);
     }
 
+
+    public int getMoneyLeft() {
+        UserAccount user = login.getAuthenticationController().getUser();
+
+        if (user != null) {
+            Parieur parieurByUsername = administrateurController.getParieurByUsername(user.getUsername());
+            this.moneyLeft = parieurByUsername.getMoney();
+        }
+        return moneyLeft;
+    }
+
     public void betMatch(Integer id, Matche match) {
+        if (amount > 0) {
+            Cote cote = new Cote();
+            cote.setExactScore(50);
+
+            Pari pari = new Pari();
+            pari.setMoney(amount);
+            pari.setTeamId(id);
+            pari.setCote(cote);
+            pari.setMatche(match);
+
+            UserAccount user = login.getAuthenticationController().getUser();
+
+            if (user != null) {
+                Parieur parieurByUsername = administrateurController.getParieurByUsername(user.getUsername());
+                data.createPari(parieurByUsername.getId(), pari);
+            }
+        }
+    }
+
+    public void autoBet(Integer id, Matche match) {
         Cote cote = new Cote();
         cote.setExactScore(50);
 
         Pari pari = new Pari();
-        pari.setMoney(amount);
+        pari.setMoney(moneyLeft/2);
         pari.setTeamId(id);
         pari.setCote(cote);
         pari.setMatche(match);
 
-        UserAccount user = authController.getUser();
+        UserAccount user = login.getAuthenticationController().getUser();
 
-        if (user != null) data.createPari(user.getUsername(), pari);
+        if (user != null) {
+            Parieur parieurByUsername = administrateurController.getParieurByUsername(user.getUsername());
+            data.createPari(parieurByUsername.getId(), pari);
+        }
     }
 
+    public Integer getSuggestMoney() {
+        return moneyLeft / 2;
+    }
 }
