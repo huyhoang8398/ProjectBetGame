@@ -6,6 +6,7 @@ import Model.*;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
@@ -90,6 +91,15 @@ public class AdministrateurController {
         return em.find(Parieur.class, id);
     }
 
+    public Parieur getParieurByUsername(String username){
+        Query query = em.createQuery("select t from Parieur t where t.userAccount.username = :username");
+        List<Parieur> parieurs = query.setParameter("username", username).getResultList();
+        if(parieurs != null && !parieurs.isEmpty()) {
+            return parieurs.get(0);
+        }
+        return null;
+    }
+
     public Bookmakeur getBookmakeur(long id){
         return em.find(Bookmakeur.class, id);
     }
@@ -107,4 +117,24 @@ public class AdministrateurController {
         em.persist(userAccount);
         return userAccount.getUsername();
     }
+
+//    @Schedule(second = "*/10", minute = "*", hour = "*", persistent = false)
+//    public void scheduleCheckResult(){
+//        SeasonMatch currentSeason = FootballRestService.getCurrentSeason(competition);
+//        int lastMatchday = currentSeason.getCurrentMatchDay() - 1;
+//        List<Matche> listOfMatch = FootballRestService.getListOfMatch(competition, lastMatchday);
+//
+//        List<Matche> matches = getListMatche();
+//        List<Parieur> parieurlst = getListParieur();
+//        for (Parieur parieur : parieurlst){
+//            List<Pari> pariLst = parieur.getPariLst();
+//            for (Pari pari : pariLst){
+//                Cote cote = pari.getCote();
+//                int moneybet = pari.getMoney();
+//                Matche matche = pari.getMatche();
+//matche.
+//            }
+//        }
+//        System.out.println("test abcxyz");
+//    }
 }
