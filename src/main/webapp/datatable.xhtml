@@ -22,7 +22,7 @@
 </style>
 <div>
     <h:outputLabel value="UserAccount Table"/>
-    <h:dataTable value="#{datatable.userAccounts}" var="itemuser">
+    <h:dataTable value="#{datatableFace.userAccounts}" var="itemuser">
         <h:column>
             <f:facet name="header">Username</f:facet>
             <h:outputLabel value="#{itemuser.username}" size="10"/>
@@ -40,7 +40,7 @@
 
 <div>
     <h:outputLabel value="Bookmakeurs Table"/>
-    <h:dataTable value="#{datatable.bookmakeurs}" var="item">
+    <h:dataTable value="#{datatableFace.bookmakeurs}" var="item">
         <h:column>
             <f:facet name="header">id</f:facet>
             <h:outputLabel value="#{item.id}" size="10"/>
@@ -62,7 +62,7 @@
 
 <div>
     <h:outputLabel value="Parieur Table"/>
-    <h:dataTable value="#{datatable.parieurs}" var="itemparieur">
+    <h:dataTable value="#{datatableFace.parieurs}" var="itemparieur">
         <h:column>
             <f:facet name="header">id</f:facet>
             <h:outputLabel value="#{itemparieur.id}" size="10"/>
@@ -90,7 +90,7 @@
 
 <div>
     <h:outputLabel value="Cote Table"/>
-    <h:dataTable value="#{datatable.cotes}" var="itemcote">
+    <h:dataTable value="#{datatableFace.cotes}" var="itemcote">
         <h:column>
             <f:facet name="header">id</f:facet>
             <h:outputLabel value="#{itemcote.id}" size="10"/>
@@ -118,7 +118,7 @@
 
 <div>
     <h:outputLabel value="Matche Table"/>
-    <h:dataTable value="#{datatable.matches}" var="itemmatch">
+    <h:dataTable value="#{datatableFace.matches}" var="itemmatch">
         <h:column>
             <f:facet name="header">id</f:facet>
             <h:outputLabel value="#{itemmatch.id}" size="10"/>
@@ -176,7 +176,7 @@
 
 <div>
     <h:outputLabel value="Paris Table"/>
-    <h:dataTable value="#{datatable.paris}" var="itemparis">
+    <h:dataTable value="#{datatableFace.paris}" var="itemparis">
         <h:column>
             <f:facet name="header">id</f:facet>
             <h:outputLabel value="#{itemparis.id}" size="10"/>

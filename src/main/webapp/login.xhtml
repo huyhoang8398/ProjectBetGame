@@ -19,11 +19,11 @@
         <h:form>
             <div class="nes-field">
                 <label for="name_field">Username</label>
-                <h:inputText class="nes-input" id="loginUsername" pt:placeholder="Enter Username*" required="true" requiredMessage="You must enter your username" value="#{login.username}"/>
+                <h:inputText class="nes-input" id="loginUsername" pt:placeholder="Enter Username*" required="true" requiredMessage="You must enter your username" value="#{loginFace.username}"/>
             </div>
             <div class="nes-field">
                 <label for="name_field">Password</label>
-                <h:inputSecret class="nes-input" id="loginPassword" pt:placeholder="Enter Password*" required="true" requiredMessage="You must enter your password" value="#{login.password}"/>
+                <h:inputSecret class="nes-input" id="loginPassword" pt:placeholder="Enter Password*" required="true" requiredMessage="You must enter your password" value="#{loginFace.password}"/>
             </div>
             <label>
                 <input type="checkbox" class="nes-checkbox" />
@@ -39,25 +39,25 @@
             <h:messages id="registStatus" infoStyle="color:darkorange"/>
             <div class="nes-field">
                 <label for="registerUsername">Username</label>
-                <h:inputText class="nes-input" id="registerUsername" pt:placeholder="Enter Username*" required="true" requiredMessage="You must enter your username" value="#{register.username}" />
+                <h:inputText class="nes-input" id="registerUsername" pt:placeholder="Enter Username*" required="true" requiredMessage="You must enter your username" value="#{registerFace.username}" />
             </div>
             <div class="nes-field">
                 <label for="registerFullName">Full Name</label>
-                <h:inputText class="nes-input" id="registerFullName" pt:placeholder="Enter your name*" required="true" requiredMessage="You must enter your fullname" value="#{register.name}" />
+                <h:inputText class="nes-input" id="registerFullName" pt:placeholder="Enter your name*" required="true" requiredMessage="You must enter your fullname" value="#{registerFace.name}" />
             </div>
             <div class="nes-field">
                 <label for="registerPassword">Password</label>
-                <h:inputSecret class="nes-input" id="registerPassword" pt:placeholder="Enter Password*" required="true" requiredMessage="You must enter your password" value="#{register.password}"/>
+                <h:inputSecret class="nes-input" id="registerPassword" pt:placeholder="Enter Password*" required="true" requiredMessage="You must enter your password" value="#{registerFace.password}"/>
             </div>
             <div class="nes-field">
                 <label for="confirmPassword">Confirm Password</label>
-                <h:inputSecret  id="confirmPassword" class="nes-input" pt:placeholder="Enter Confirm Password*" required="true" requiredMessage="You must enter your password" value="#{register.confirmPassword}"/>
+                <h:inputSecret  id="confirmPassword" class="nes-input" pt:placeholder="Enter Confirm Password*" required="true" requiredMessage="You must enter your password" value="#{registerFace.confirmPassword}"/>
             </div>
             <h:message for="confirmPassword" class="error" id="confirmPasswordError" />
 
             <div class="nes-field">
                 <label for="registerTwitter">Twitter</label>
-                <h:inputText type="text" class="nes-input" id="registerTwitter" pt:placeholder="Enter Twitter Username*" required="true" requiredMessage="You must enter your twitter username" value="#{register.twitterName}"/>
+                <h:inputText type="text" class="nes-input" id="registerTwitter" pt:placeholder="Enter Twitter Username*" required="true" requiredMessage="You must enter your twitter username" value="#{registerFace.twitterName}"/>
             </div>
             <br/>
             <h:commandButton action="regist" class="nes-btn is-primary" value="Register" />

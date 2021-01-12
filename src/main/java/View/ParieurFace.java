@@ -9,7 +9,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 
 @Named
@@ -23,7 +22,7 @@ public class ParieurFace implements Serializable {
     List<Matche> macths;
 
     @Inject
-    DetailMatch detailMatch;
+    DetailMatchFace detailMatchFace;
 
 
     public int pickPariMatch(int idmatch, Pari pari) {
@@ -59,7 +58,7 @@ public class ParieurFace implements Serializable {
     }
 
     public String detailMatch(int id) {
-        detailMatch.setId(id);
+        detailMatchFace.setId(id);
         return "";
     }
 

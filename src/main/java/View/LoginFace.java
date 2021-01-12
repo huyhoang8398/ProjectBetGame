@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 @Named
 @SessionScoped
-public class Login implements Serializable {
+public class LoginFace implements Serializable {
     String username;
     String password;
     boolean userLogined = false;
@@ -24,7 +24,7 @@ public class Login implements Serializable {
     @EJB
     AuthenticationController authenticationController;
 
-    public Login() {
+    public LoginFace() {
     }
 
     public String getUsername() {

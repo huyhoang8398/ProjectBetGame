@@ -165,14 +165,6 @@ public class ParieurController {
         return null;
     }
 
-    public long createPariLocal(long userId, Pari pari) {
-//        em.persist(pari.getMatche().getResultmatch());
-//        em.persist(pari.getMatche());
-        em.persist(pari);
-        em.persist(pari.getCote());
-        return -1;
-    }
-
 //    public static void main(String[] args) {
 //        ClientConfig cf = new ClientConfig();
 //        Client c = ClientBuilder.newClient(cf);

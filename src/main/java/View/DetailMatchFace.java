@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Named
 @SessionScoped
 
-public class DetailMatch implements Serializable {
+public class DetailMatchFace implements Serializable {
     private int id;
     private int amount;
     private int moneyLeft;
@@ -23,7 +23,8 @@ public class DetailMatch implements Serializable {
     ParieurController data;
     Matche match;
 
-    @Inject Login login;
+    @Inject
+    LoginFace loginFace;
     @EJB
     AdministrateurController administrateurController;
 
@@ -57,7 +58,7 @@ public class DetailMatch implements Serializable {
 
 
     public int getMoneyLeft() {
-        UserAccount user = login.getAuthenticationController().getUser();
+        UserAccount user = loginFace.getAuthenticationController().getUser();
 
         if (user != null) {
             Parieur parieurByUsername = administrateurController.getParieurByUsername(user.getUsername());
@@ -77,7 +78,7 @@ public class DetailMatch implements Serializable {
             pari.setCote(cote);
             pari.setMatche(match);
 
-            UserAccount user = login.getAuthenticationController().getUser();
+            UserAccount user = loginFace.getAuthenticationController().getUser();
 
             if (user != null) {
                 Parieur parieurByUsername = administrateurController.getParieurByUsername(user.getUsername());
@@ -96,7 +97,7 @@ public class DetailMatch implements Serializable {
         pari.setCote(cote);
         pari.setMatche(match);
 
-        UserAccount user = login.getAuthenticationController().getUser();
+        UserAccount user = loginFace.getAuthenticationController().getUser();
 
         if (user != null) {
             Parieur parieurByUsername = administrateurController.getParieurByUsername(user.getUsername());

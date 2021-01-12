@@ -2,12 +2,19 @@ package Controller;
 
 
 import Model.*;
+import Service.FootballRestService;
 
+import javax.ejb.Schedule;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static Service.FootballRestService.competition;
 
 @Stateless
 public class AdministrateurController {
@@ -51,7 +58,7 @@ public class AdministrateurController {
 
     public long createBookmakeur(Bookmakeur bookmakeur) {
         Matche matche = em.find(Matche.class, bookmakeur.getMatcheHost().getId());
-        if(matche == null) {
+        if (matche == null) {
             em.persist(bookmakeur);
             em.persist(bookmakeur.getMatcheHost());
             em.persist(bookmakeur.getMatcheHost().getResultmatch());
@@ -78,7 +85,7 @@ public class AdministrateurController {
     public long createParieur(Parieur parieur) {
         UserAccount userAccount = parieur.getUserAccount();
         UserAccount userAccountFound = em.find(UserAccount.class, userAccount.getUsername());
-        if(userAccountFound == null) {
+        if (userAccountFound == null) {
             parieur.setMoney(1000); // 1000 Limcoin
             em.persist(parieur);
             em.persist(parieur.getUserAccount());
@@ -87,20 +94,20 @@ public class AdministrateurController {
         return -1;
     }
 
-    public Parieur getParieur(long id){
+    public Parieur getParieur(long id) {
         return em.find(Parieur.class, id);
     }
 
-    public Parieur getParieurByUsername(String username){
+    public Parieur getParieurByUsername(String username) {
         Query query = em.createQuery("select t from Parieur t where t.userAccount.username = :username");
         List<Parieur> parieurs = query.setParameter("username", username).getResultList();
-        if(parieurs != null && !parieurs.isEmpty()) {
+        if (parieurs != null && !parieurs.isEmpty()) {
             return parieurs.get(0);
         }
         return null;
     }
 
-    public Bookmakeur getBookmakeur(long id){
+    public Bookmakeur getBookmakeur(long id) {
         return em.find(Bookmakeur.class, id);
     }
 
@@ -110,7 +117,16 @@ public class AdministrateurController {
 
     public void deleteParieur(Parieur parieurFace) {
         em.remove(em.contains(parieurFace) ? parieurFace : em.merge(parieurFace));
+        List<Pari> pariLst = parieurFace.getPariLst();
+        for(Pari pari : pariLst) {
+            deletePari(pari);
+        }
         em.remove(em.contains(parieurFace.getUserAccount()) ? parieurFace.getUserAccount() : em.merge(parieurFace.getUserAccount()));
+    }
+
+    public void deletePari(Pari pari) {
+        em.remove(em.contains(pari) ? pari : em.merge(pari));
+        em.remove(em.contains(pari.getCote()) ? pari.getCote() : em.merge(pari.getCote()));
     }
 
     public String createAccount(UserAccount userAccount) {
@@ -118,23 +134,64 @@ public class AdministrateurController {
         return userAccount.getUsername();
     }
 
-//    @Schedule(second = "*/10", minute = "*", hour = "*", persistent = false)
-//    public void scheduleCheckResult(){
-//        SeasonMatch currentSeason = FootballRestService.getCurrentSeason(competition);
-//        int lastMatchday = currentSeason.getCurrentMatchDay() - 1;
-//        List<Matche> listOfMatch = FootballRestService.getListOfMatch(competition, lastMatchday);
-//
-//        List<Matche> matches = getListMatche();
-//        List<Parieur> parieurlst = getListParieur();
-//        for (Parieur parieur : parieurlst){
-//            List<Pari> pariLst = parieur.getPariLst();
-//            for (Pari pari : pariLst){
-//                Cote cote = pari.getCote();
-//                int moneybet = pari.getMoney();
-//                Matche matche = pari.getMatche();
-//matche.
-//            }
-//        }
-//        System.out.println("test abcxyz");
-//    }
+    @Schedule(second = "*/10", minute = "*", hour = "*", persistent = false)
+    public void scheduleCheckResult() {
+        SeasonMatch currentSeason = FootballRestService.getCurrentSeason(competition);
+        int lastMatchday = currentSeason.getCurrentMatchDay() - 1;
+        List<Matche> matchlstLastDay = FootballRestService.getListOfMatch(competition, lastMatchday);
+        Map<Integer, Matche> hmapMatchs = new HashMap<>();
+
+        List<Parieur> parieurlst = getListParieur();
+        for (Parieur parieur : parieurlst) {
+            List<Pari> pariLst = parieur.getPariLst();
+            List<Pari> newpariLst = new ArrayList<>();
+            for (Pari pari : pariLst) {
+                Cote cote = pari.getCote();
+                int moneybet = pari.getMoney();
+                int teamId = pari.getTeamId();
+                Matche matcheBet = pari.getMatche();
+                int idmatch = matcheBet.getId();
+
+                if (!hmapMatchs.containsKey(idmatch)) {
+                    for (Matche m : matchlstLastDay){
+                        if(m.getId() == idmatch){
+                            hmapMatchs.put(idmatch, m);
+                            break;
+                        }
+                    }
+                    if (!hmapMatchs.containsKey(idmatch)){
+                        Matche oldMatchFound = FootballRestService.getMatch(idmatch);
+                        hmapMatchs.put(idmatch, oldMatchFound);
+                        System.out.println("Look for match again on REST");
+                    }
+                }
+
+                if(hmapMatchs.containsKey(idmatch)) {
+                    Matche matche = hmapMatchs.get(idmatch);
+                    ResultMatch resultmatch = matche.getResultmatch();
+
+                    if (resultmatch.getWinner().isEmpty()){
+                        newpariLst.add(pari);
+                    } else {
+                        if (resultmatch.getWinner().equals("DRAW")) {
+                            parieur.setMoney(parieur.getMoney() + moneybet);
+                        } else if (resultmatch.getWinner().equals("HOME_TEAM")) {
+                            if (teamId == matche.getHomeTeamId()) {
+                                parieur.setMoney(parieur.getMoney() + moneybet + moneybet * (int) cote.getExactScore());
+                            }
+                        } else if (resultmatch.getWinner().equals("AWAY_TEAM")) {
+                            if (teamId == matche.getAwayTeamId()) {
+                                parieur.setMoney(parieur.getMoney() + moneybet + moneybet * (100 - (int) cote.getExactScore()));
+                            }
+                        }
+                        deletePari(pari);
+                    }
+                } else {
+                    System.err.println("Not found id match");
+                }
+            }
+            parieur.setPariLst(newpariLst);
+            updateParieur(parieur);
+        }
+    }
 }
