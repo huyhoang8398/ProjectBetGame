@@ -6,14 +6,13 @@ import Controller.ParieurController;
 import Model.*;
 
 import javax.ejb.EJB;
-import javax.faces.context.FacesContext;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.Map;
 
 @Named
-@ViewScoped
+@SessionScoped
 public class Login implements Serializable {
     String username;
     String password;
@@ -62,6 +61,10 @@ public class Login implements Serializable {
 
     public Integer login(String username, String password) {
         return authenticationController.checkLogin(username, password);
+    }
+
+    public AuthenticationController getAuthenticationController() {
+        return authenticationController;
     }
 
 }

@@ -1,6 +1,7 @@
 package Service;
 
 import Controller.AdministrateurController;
+import Controller.ParieurController;
 import Model.Matche;
 import Model.Pari;
 import Model.Parieur;
@@ -8,6 +9,7 @@ import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.json.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,6 +25,7 @@ import java.util.List;
 // Access token: 1341519224309772294-uv719zY4of9Qw9RABT0vMzTSXyvULy
 // Access tokken secret: wIwlLQMaUBIgokAdnalHSnztgLm5gKSwhx67mjOIJd0wF
 
+@Stateless
 @Path("/parieur")
 public class ParieurRestService {
 
@@ -31,6 +34,9 @@ public class ParieurRestService {
 
     @EJB
     AdministrateurController aministrateurController;
+
+    @EJB
+    ParieurController parieurController;
 
     static Twitter twitter;
     String competition = "PL"; // Premier League
@@ -94,12 +100,14 @@ public class ParieurRestService {
         if (moneyleft < 0) {
             return Json.createObjectBuilder().add("value", -1).build();
         } else {
-            em.persist(pari);
-            em.persist(pari.getCote());
             parieur.setMoney(moneyleft);
             List<Pari> pariLst = parieur.getPariLst();
             pariLst.add(pari);
             parieur.setPariLst(pariLst);
+
+
+            em.persist(pari);
+            em.persist(pari.getCote());
             em.persist(parieur);
         }
         return Json.createObjectBuilder().add("value", pari.getId()).build();

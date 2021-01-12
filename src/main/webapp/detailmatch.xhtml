@@ -6,6 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <head>
+    <title>Match Detail</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
     <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
@@ -21,11 +22,12 @@
     <div class="row justify-content-center pt-3">
         <div class="col-4">
             <div class="card bg-light mb-3" style="max-width: 18rem;">
-               <div class="card-header">#{match.name}</div>
+                <div class="card-header">#{match.name}</div>
                 <div class="card-body">
                     <h5 class="card-title">#{match.homeTeam}</h5>
                     <p class="card-text">Home team</p>
-                    <h:commandButton value="Bet" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
+<!--                    <p class="card-text">#{match.homeTeamId}</p>-->
+                    <h:commandButton action="#{detailMatch.betMatch(match.homeTeamId, match)}" value="Bet" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
                 </div>
             </div>
         </div>
@@ -36,17 +38,23 @@
                 <div class="card-body">
                     <h5 class="card-title">#{match.awayTeam}</h5>
                     <p class="card-text">Away Team</p>
-                    <h:commandButton value="Bet" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
+<!--                    <p class="card-text">#{match.awayTeamId}</p>-->
+                    <h:commandButton action="#{detailMatch.betMatch(match.awayTeamId, match)}" value="Bet" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
                 </div>
             </div>
         </div>
         <div class="nes-field justify-content-center">
+            <p class="nes-text is-success">Available Money #{detailMatch.moneyLeft}</p>
             <label for="moneyBet">Amount</label>
             <h:inputText class="nes-input" id="moneyBet" pt:placeholder="Enter amount of money you want to bet*" required="true" value="#{detailMatch.amount}" />
+
         </div>
     </div>
-    </ui:repeat>
+    <p class="nes-text is-warning">Suggestion Bet</p>
+    <h:commandButton action="#{detailMatch.autoBet(match.homeTeamId, match)}" value="Bet #{detailMatch.suggestMoney} for Home Team " class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" /> <br/>
+    <h:commandButton action="#{detailMatch.autoBet(match.awayTeamId, match)}" value="Bet #{detailMatch.suggestMoney} for Away Team" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
 
+    </ui:repeat>
     </h:form>
 </div>
 

@@ -2,13 +2,13 @@ package Controller;
 
 import Model.UserAccount;
 
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Stateless
+@Stateful
 public class AuthenticationController {
-
+    UserAccount user;
     @PersistenceContext
     private EntityManager em;
 
@@ -17,7 +17,14 @@ public class AuthenticationController {
             return 2;
         }
         UserAccount userAccount = em.find(UserAccount.class, username);
-        if (userAccount != null && userAccount.getPassword().equals(password)) return userAccount.getRole();
+        if (userAccount != null && userAccount.getPassword().equals(password)) {
+            user = userAccount;
+            return userAccount.getRole();
+        }
         return null;
+    }
+
+    public UserAccount getUser() {
+        return user;
     }
 }

@@ -4,6 +4,7 @@ import Model.Matche;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
+import javax.ejb.Stateless;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -18,7 +19,7 @@ import java.util.List;
 // Bearer token: AAAAAAAAAAAAAAAAAAAAAH6VKwEAAAAA5ARe5HkYVZ6oMyGzlBWsPHbPxek%3DDFlfjoAyUspasR733kxF1i0tMXIwVopbErYyb5P1TSDqd3q6P0
 // Access token: 1341519224309772294-uv719zY4of9Qw9RABT0vMzTSXyvULy
 // Access tokken secret: wIwlLQMaUBIgokAdnalHSnztgLm5gKSwhx67mjOIJd0wF
-
+@Stateless
 @Path("/service")
 public class RestService {
     static Twitter twitter;
