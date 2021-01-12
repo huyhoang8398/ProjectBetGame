@@ -11,7 +11,7 @@ import java.util.List;
 
 @Named
 @ViewScoped
-public class Datatable implements Serializable {
+public class DatatableFace implements Serializable {
 
     @EJB
     AdministrateurController administrateurController;

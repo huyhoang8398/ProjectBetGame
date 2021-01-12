@@ -16,8 +16,8 @@
 
 <div class="container pt-3">
     <h:form>
-    <ui:repeat value="#{detailMatch.detailMatch}" var="match">
-    <h2 class="nes-text is-success" style="text-align: center">Match ID #{detailMatch.id}</h2>
+    <ui:repeat value="#{detailMatchFace.detailMatch}" var="match">
+    <h2 class="nes-text is-success" style="text-align: center">Match ID #{detailMatchFace.id}</h2>
     <p class="nes-text is-warning" style="text-align: center" >Date: #{match.startDate}</p>
     <div class="row justify-content-center pt-3">
         <div class="col-4">
@@ -27,7 +27,7 @@
                     <h5 class="card-title">#{match.homeTeam}</h5>
                     <p class="card-text">Home team</p>
 <!--                    <p class="card-text">#{match.homeTeamId}</p>-->
-                    <h:commandButton action="#{detailMatch.betMatch(match.homeTeamId, match)}" value="Bet" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
+                    <h:commandButton action="#{detailMatchFace.betMatch(match.homeTeamId, match)}" value="Bet" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
                 </div>
             </div>
         </div>
@@ -39,20 +39,20 @@
                     <h5 class="card-title">#{match.awayTeam}</h5>
                     <p class="card-text">Away Team</p>
 <!--                    <p class="card-text">#{match.awayTeamId}</p>-->
-                    <h:commandButton action="#{detailMatch.betMatch(match.awayTeamId, match)}" value="Bet" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
+                    <h:commandButton action="#{detailMatchFace.betMatch(match.awayTeamId, match)}" value="Bet" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
                 </div>
             </div>
         </div>
         <div class="nes-field justify-content-center">
-            <p class="nes-text is-success">Available Money #{detailMatch.moneyLeft}</p>
+            <p class="nes-text is-success">Available Money #{detailMatchFace.moneyLeft}</p>
             <label for="moneyBet">Amount</label>
-            <h:inputText class="nes-input" id="moneyBet" pt:placeholder="Enter amount of money you want to bet*" required="true" value="#{detailMatch.amount}" />
+            <h:inputText class="nes-input" id="moneyBet" pt:placeholder="Enter amount of money you want to bet*" required="true" value="#{detailMatchFace.amount}" />
 
         </div>
     </div>
     <p class="nes-text is-warning">Suggestion Bet</p>
-    <h:commandButton action="#{detailMatch.autoBet(match.homeTeamId, match)}" value="Bet #{detailMatch.suggestMoney} for Home Team " class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" /> <br/>
-    <h:commandButton action="#{detailMatch.autoBet(match.awayTeamId, match)}" value="Bet #{detailMatch.suggestMoney} for Away Team" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
+    <h:commandButton action="#{detailMatchFace.autoBet(match.homeTeamId, match)}" value="Bet #{detailMatchFace.suggestMoney} for Home Team " class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" /> <br/>
+    <h:commandButton action="#{detailMatchFace.autoBet(match.awayTeamId, match)}" value="Bet #{detailMatchFace.suggestMoney} for Away Team" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
 
     </ui:repeat>
     </h:form>

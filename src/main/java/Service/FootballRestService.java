@@ -20,6 +20,7 @@ public class FootballRestService {
     static long timeSave = 0;
     static String tokenAPI = "b5e4ba82e7494192945dd5d1042fbef2";
     static Client c;
+    public static final String competition = "PL";
 
     static {
         ClientConfig cf = new ClientConfig();

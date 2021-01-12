@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 @Named
 @ViewScoped
-public class Register implements Serializable {
+public class RegisterFace implements Serializable {
     String username;
     String name;
     String password;
@@ -24,7 +24,7 @@ public class Register implements Serializable {
     @EJB
     AdministrateurController administrateurController;
 
-    public Register() {
+    public RegisterFace() {
 
     }
 

@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.Bookmakeur;
 import Model.Matche;
 import Service.FootballRestService;
 
@@ -13,11 +12,12 @@ import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 
+import static Service.FootballRestService.competition;
+
 @Stateless
 public class BookmakeurController {
     @PersistenceContext
     private EntityManager em;
-    String competition = "PL";
 
     public List<Matche> getScheduleMatche() {
         return FootballRestService.getScheduleMatch(competition);
@@ -55,6 +55,4 @@ public class BookmakeurController {
         em.remove(matche.getResultmatch());
         return 1;
     }
-
-
 }
