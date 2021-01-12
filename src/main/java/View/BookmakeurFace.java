@@ -85,6 +85,7 @@ public class BookmakeurFace implements Serializable {
         bookmaker.setRole(1);
         bookmakeur.setUserAccount(bookmaker);
         Cote cote = new Cote();
+        cote.setExactScore(50);
         bookmakeur.setCote(cote);
         return administrateurController.createBookmakeur(bookmakeur);
     }

@@ -4,6 +4,7 @@ import Model.Matche;
 import Model.Pari;
 import org.glassfish.jersey.client.ClientConfig;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -19,7 +20,6 @@ import java.util.List;
 
 @Stateless
 public class ParieurController {
-
     public List<Matche> getListMatch(String search) {
         ClientConfig cf = new ClientConfig();
         Client c = ClientBuilder.newClient(cf);
@@ -76,7 +76,7 @@ public class ParieurController {
             JsonObject jsonObject = reader.readObject();
             Matche m = new Matche();
             m.fromJsonObject(jsonObject);
-            System.out.println("Test" + m.getAwayTeam() + m.getHomeTeam());
+            System.out.println("Test" + m);
             return m;
         }
         return null;

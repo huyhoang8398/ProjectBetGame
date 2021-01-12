@@ -6,6 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <head>
+    <title>Match Detail</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
     <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
@@ -25,7 +26,8 @@
                 <div class="card-body">
                     <h5 class="card-title">#{match.homeTeam}</h5>
                     <p class="card-text">Home team</p>
-                    <h:commandButton value="Bet" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
+<!--                    <p class="card-text">#{match.homeTeamId}</p>-->
+                    <h:commandButton action="#{detailMatch.betMatch(match.homeTeamId, match)}" value="Bet" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
                 </div>
             </div>
         </div>
@@ -36,7 +38,8 @@
                 <div class="card-body">
                     <h5 class="card-title">#{match.awayTeam}</h5>
                     <p class="card-text">Away Team</p>
-                    <h:commandButton value="Bet" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
+<!--                    <p class="card-text">#{match.awayTeamId}</p>-->
+                    <h:commandButton action="#{detailMatch.betMatch(match.awayTeamId, match)}" value="Bet" class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;" />
                 </div>
             </div>
         </div>
@@ -46,7 +49,6 @@
         </div>
     </div>
     </ui:repeat>
-
     </h:form>
 </div>
 
