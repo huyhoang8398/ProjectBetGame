@@ -8,7 +8,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <head>
-    <title>Hisory Game Bet</title>
+    <title>Hall of Fame</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
     <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
@@ -16,33 +16,19 @@
 
 </head>
 <body>
-<h1>History Game list</h1>
+<h1>Hall of Fame</h1>
+
 <div class="container d-flex justify-content-center">
-    <div style="margin-bottom: 30px" class="nes-table-responsive ">
-        <h:outputLabel value="History Bet"/>
-        <h:dataTable value="#{historyBetFace.paris}" var="pari" class="nes-table is-bordered is-centered">
+    <div style="margin-bottom: 30px" class="nes-table-responsive">
+        <h:outputLabel value="Players Ranking"/>
+        <h:dataTable value="#{hallOfFameFace.parieurs}" var="pari" class="nes-table is-bordered is-centered">
             <h:column>
-                <f:facet name="header">Match ID</f:facet>
-                <h:outputLabel value="#{pari.matche.id}"/>
+                <f:facet name="header">User Name</f:facet>
+                <h:outputLabel value="#{pari.name}"/>
             </h:column>
             <h:column>
                 <f:facet name="header">Money</f:facet>
-                <h:outputLabel value="#{pari.money}" rendered="#{not historyBetFace.isEditable(pari.id)}"/>
-                <h:form>
-                    <h:inputText value="#{pari.money}" rendered="#{historyBetFace.isEditable(pari.id)}" /> <br/>
-                    <h:commandButton value="Save" action="#{historyBetFace.updateMoney(pari.id, pari.money)}" rendered="#{historyBetFace.isEditable(pari.id)}" class="nes-btn is-success" style="margin-top: 10px"/>
-                    <h:commandButton value="Cancel" action="#{historyBetFace.cancelButton(pari.id)}" rendered="#{historyBetFace.isEditable(pari.id)}" style="margin-left: 5px; margin-top: 10px" class="nes-btn is-error" />
-                </h:form>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Team ID</f:facet>
-                <h:outputLabel value="#{pari.teamId}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header"></f:facet>
-                <h:form>
-                    <h:commandButton action="#{historyBetFace.editButton(pari.id)}" class="nes-btn is-primary" value="Edit" />
-                </h:form>
+                <h:outputLabel value="#{pari.money}" />
             </h:column>
         </h:dataTable>
     </div>
