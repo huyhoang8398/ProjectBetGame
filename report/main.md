@@ -29,6 +29,7 @@ caption-justification: centering
 \pagenumbering{arabic} 
 
 # I. Introduction
+
 The application that we had developed is a Football bet website with the most up-to-date matches, placing a bet on Football has never been so easy.
 
 # II. Implemented functionalities
@@ -37,7 +38,6 @@ In this project, we have done all the required function as in the project descri
 
 - Using data from [Football API](https://www.football-data.org/)
 - Using MVC architecture
-- Implemented REST API for Parieur
 - Administrator
     - The Administrator is responsible for the creation, modification, deletion of Bettors and Bookmakers 
     - Allow Administrator to create a Bookmaker, Parieur and assign a Match for them
@@ -50,6 +50,12 @@ In this project, we have done all the required function as in the project descri
     - The Bettor can view all proposed Matches and place Bets on all Matches that interest him in the limit of funds available
     - Changing the bet and see their history bet
     - Can search for a particular Match that interests him
+- By the result of the match all the Bettors who have succeeded in their bet will receive their coin and vice versa
+- A ranking of Bettors is available in the app.cation. It is made on the amount of Limcoins they have
+- Advanced features:
+    - Implemented REST API for Parieur
+    - REST services
+    - Twitter notification (beta)
 
 # III. Programs, Materials, Architecture
 
@@ -59,7 +65,7 @@ A clean codebase is always a pleasure to work with. A well organized codebase is
 
 ## Use-cases
 
-![Use-case diagram](use-cases.png){ width=70% }
+![Use-case diagram](use-cases.png){ width=60% }
 
 As the aim of this project is to create a football bet platform. The application has three main characters which is Normal User, Administrator and Bookmaker.
 
@@ -71,7 +77,7 @@ The application service later will fetch the result of these match and update th
 
 ## Flow chart
 
-![Flow chart](flow-chart.png){ width=70% } 
+![Flow chart](flow-chart.png){ width=60% } 
 
 ## Login and Register View
 
@@ -91,7 +97,10 @@ The application service later will fetch the result of these match and update th
 
 ![Client History Bet page](clientHist.png){ width=70% }
 
+![Hall of fame](clientHall.png){ width=70% }
+
 # IV. Conclusion and Future work
 
+In this project, we have fulfilled the standard requirements and also advanced feature set out from the beginning in a short amount of time. We have presented the details of the implementation and also our special features. In the future work, we want to add Authentication security to strengthen our site , also improving the twitter notification feature and improving the web performance and scalability.
 
 
