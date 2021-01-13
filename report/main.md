@@ -55,7 +55,9 @@ In this project, we have done all the required function as in the project descri
 - Advanced features:
     - Implemented REST API for Parieur
     - REST services
-    - Twitter notification (beta)
+    - Twitter notification:
+        - Sending a message to user twitter account announcing there is a new Bet Match available
+        - Notify user the result of the match every weak
 
 # III. Programs, Materials, Architecture
 
@@ -73,31 +75,36 @@ The administrator has the role to create a bookmaker and assign them with a real
 
 The client can browse all the available match which was hosted by administrator and a bookmaker and place a bet on it They also can edit their bet later.
 
-The application service later will fetch the result of these match and update the user money based their bet result.
+The application service later will fetch the result of these match and update the user money based their bet result. And also, every time there is a new match which is available for bet, our service application will send an message announcing to user through twitter. And also we use twitter notification to announce the match result which is an advance feature.
 
 ## Flow chart
 
-![Flow chart](flow-chart.png){ width=60% } 
+![Flow chart](flow-chart.png){ width=60% }
 
+# Appendix 
 ## Login and Register View
 
-![Login Page](login.png){ width=70% }
+![Login Page](login.png){ width=60% }
 
 ## Administrator Page
 
-![Admin Page (View all user data)](adminV1.png){ width=70% }
+![Admin Page (View all user data)](adminV1.png){ width=60% }
 
-![Admin Page (Host a Match)](adminV2.png){ width=70% }
+![Admin Page (Host a Match)](adminV2.png){ width=60% }
 
 ## Client Page
 
-![Client Main page](clientMain.png){ width=70% }
+![Client Main page](clientMain.png){ width=60% }
 
-![Client Bet page](clientBet.png){ width=70% }
+![Client Bet page](clientBet.png){ width=60% }
 
-![Client History Bet page](clientHist.png){ width=70% }
+![Client History Bet page](clientHist.png){ width=60% }
 
-![Hall of fame](clientHall.png){ width=70% }
+![Hall of fame](clientHall.png){ width=60% }
+
+![Twitter announcing new match](twitterNew.png){ width=60% }
+
+![Twitter announcing result match](twitterRes.png){ width=60% }
 
 # IV. Conclusion and Future work
 
